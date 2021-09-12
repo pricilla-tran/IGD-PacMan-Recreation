@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: 0e13833679d203449bdebed5ba9f3ed8
+guid: ca98d4ec32856b64bbe88c4dc1d096e2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -671317945438955680
-    second: PowerPellet_0
+      213: 7009517928296322738
+    second: WallSprite_Tile_0
   - first:
-      213: 3348014233251927815
-    second: PowerPellet_1
+      213: 964069050563505821
+    second: WallSprite_Tile_1
   - first:
-      213: -7773571923748207471
-    second: PowerPellet_2
+      213: -8451622810454845663
+    second: WallSprite_Tile_2
   - first:
-      213: 2221083934954678062
-    second: PowerPellet_3
+      213: 8368686455254079841
+    second: WallSprite_Tile_3
+  - first:
+      213: 6475515063313899961
+    second: WallSprite_Tile_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,11 +118,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PowerPellet_0
+      name: WallSprite_Tile_0
       rect:
         serializedVersion: 2
-        x: 110
-        y: 108
+        x: 112
+        y: 616
         width: 40
         height: 40
       alignment: 0
@@ -129,8 +132,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06714caa2effea6f0800000000000000
-      internalID: -671317945438955680
+      spriteID: 2b695d2fa6fc64160800000000000000
+      internalID: 7009517928296322738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallSprite_Tile_1
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 616
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9e29c191bf016d00800000000000000
+      internalID: 964069050563505821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallSprite_Tile_2
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 360
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 127104f15ddc5ba80800000000000000
+      internalID: -8451622810454845663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallSprite_Tile_3
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 360
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 169da0aedfb832470800000000000000
+      internalID: 8368686455254079841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WallSprite_Tile_4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 104
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b1248e24a6add950800000000000000
+      internalID: 6475515063313899961
       vertices: []
       indices: 
       edges: []
