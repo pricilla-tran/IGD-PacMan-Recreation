@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private GameObject character;
     private Tweener tweener;
+    public Animator animatorController;
 
     // Start is called before the first frame update
     void Start()
@@ -17,14 +18,24 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("Horizontal"))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-
+            animatorController.SetTrigger("UpParam");
         }
 
-        if (Input.GetKeyDown("Vertical"))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            animatorController.SetTrigger("DownParam");
+        }
 
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            animatorController.SetTrigger("LeftParam");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            animatorController.SetTrigger("RightParam");
         }
     }
 }
