@@ -7060,6 +7060,9 @@ MonoBehaviour:
   Ghost2: {fileID: 498377827}
   Ghost3: {fileID: 937417618}
   Ghost4: {fileID: 857425196}
+  tiles:
+  - {fileID: 589625955098396311, guid: 8321f095c7c966f46af78ccef7e74e39, type: 3}
+  - {fileID: 1268920922869966345, guid: 8321f095c7c966f46af78ccef7e74e39, type: 3}
 --- !u!4 &189035515
 Transform:
   m_ObjectHideFlags: 0
