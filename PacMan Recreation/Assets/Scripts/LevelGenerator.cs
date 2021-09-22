@@ -9,7 +9,7 @@ public class LevelGenerator : MonoBehaviour
     public GameObject Ghost2;
     public GameObject Ghost3;
     public GameObject Ghost4;
-    public Sprite[] tiles;
+    public GameObject[] levelElements;
 
     int[,] levelMap = {
         {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
@@ -55,14 +55,26 @@ public class LevelGenerator : MonoBehaviour
                     case 0: 
                         break;
                     case 1:
-                        Instantiate(tiles[0], new Vector3(-21.5f + i, 13.5f + j, 0), Quaternion.identity);
+                        Instantiate(levelElements[0], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
                         break;
-                    case 2: break;
-                    case 3: break;
-                    case 4: break;
-                    case 5: break;
-                    case 6: break;
-                    case 7: break;
+                    case 2:
+                        Instantiate(levelElements[1], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
+                        break;
+                    case 3:
+                        Instantiate(levelElements[2], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
+                        break;
+                    case 4:
+                        Instantiate(levelElements[3], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
+                        break;
+                    case 5:
+                        Instantiate(levelElements[4], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
+                        break;
+                    case 6:
+                        Instantiate(levelElements[5], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
+                        break;
+                    case 7:
+                        Instantiate(levelElements[6], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
+                        break;
 
                 }
                 

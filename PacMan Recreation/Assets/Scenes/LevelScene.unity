@@ -7060,9 +7060,14 @@ MonoBehaviour:
   Ghost2: {fileID: 498377827}
   Ghost3: {fileID: 937417618}
   Ghost4: {fileID: 857425196}
-  tiles:
-  - {fileID: 589625955098396311, guid: 8321f095c7c966f46af78ccef7e74e39, type: 3}
-  - {fileID: 1268920922869966345, guid: 8321f095c7c966f46af78ccef7e74e39, type: 3}
+  levelElements:
+  - {fileID: 2765353202692302852, guid: 2d56433ac1156d546964123711891303, type: 3}
+  - {fileID: 6625011295020767843, guid: 45dcc68ef7bcc1843a8f3f3d03ae9ba4, type: 3}
+  - {fileID: 8418266667856020465, guid: 8aae216d90372e441bfbfc3b385704ac, type: 3}
+  - {fileID: 3832293969198713057, guid: 8763ad50b68605a46b3ab972fe654bda, type: 3}
+  - {fileID: 3423718532743828625, guid: 3562ecbc2848f4e42a65125d3f7600be, type: 3}
+  - {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+  - {fileID: 3220047905189962916, guid: 295c581e97f203441bf62907e8ae7a3f, type: 3}
 --- !u!4 &189035515
 Transform:
   m_ObjectHideFlags: 0
@@ -7238,7 +7243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &666460915
 Grid:
   m_ObjectHideFlags: 0
@@ -7326,6 +7331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerPellet4
       objectReference: {fileID: 0}
+    - target: {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
 --- !u!1 &857425196 stripped
@@ -7392,6 +7401,10 @@ PrefabInstance:
     - target: {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
       propertyPath: m_Name
       value: PowerPellet2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
@@ -7876,6 +7889,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerPellet1
       objectReference: {fileID: 0}
+    - target: {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
 --- !u!1001 &1733195357
@@ -7932,6 +7949,10 @@ PrefabInstance:
     - target: {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
       propertyPath: m_Name
       value: PowerPellet3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
