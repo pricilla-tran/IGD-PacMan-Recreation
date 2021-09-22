@@ -10,6 +10,10 @@ public class LevelGenerator : MonoBehaviour
     public GameObject Ghost3;
     public GameObject Ghost4;
     public GameObject[] levelElements;
+    private int elementLeft;
+    private int elementRight;
+    private int elementUp;
+    private int elementDown;
 
     int[,] levelMap = {
         {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
@@ -57,28 +61,83 @@ public class LevelGenerator : MonoBehaviour
 
                     switch (levelMap[i, j])
                     {
-                        case 0:
+                        case 0: // Empty
+                            elementLeft = levelMap[i, j];
                             break;
-                        case 1:
-                            Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+
+                        case 1: // Outside Corner
+                            if (elementLeft == 2 && i > 0 && levelMap[i-1, j] == 2)
+                            {
+                                Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180));
+                                elementLeft = levelMap[i, j];
+                            }
+                            else if (i > 0 && levelMap[i - 1, j] == 2)
+                            {
+                                Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
+                                elementLeft = levelMap[i, j];
+                            }
+
+                            else if (elementLeft == 2 && levelMap[i, j + 1] == 5)
+                            {
+                                Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 270));
+                                elementLeft = levelMap[i, j];
+                            }
+                            else
+                            {
+                                Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                                elementLeft = levelMap[i, j];
+                            }
                             break;
-                        case 2:
-                            Instantiate(levelElements[1], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+
+                        case 2: // Outside Wall
+                            if (i > 0 && levelMap[i-1, j] == 1) // Tile above
+                            {
+                                Instantiate(levelElements[1], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
+                                elementLeft = levelMap[i, j];
+                            }
+                            else if (i > 0 && levelMap[i - 1, j] == 2) // Tile above
+                            {
+                                Instantiate(levelElements[1], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
+                                elementLeft = levelMap[i, j];
+                            }
+                            else
+                            {
+                                Instantiate(levelElements[1], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                                elementLeft = levelMap[i, j];
+                            }
                             break;
-                        case 3:
+
+                        case 3: // Inside Corner
                             Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            elementLeft = levelMap[i, j];
                             break;
-                        case 4:
+
+                        case 4: // Inside Wall
                             Instantiate(levelElements[3], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            elementLeft = levelMap[i, j];
                             break;
-                        case 5:
+
+                        case 5: // Normal Pellet
                             Instantiate(levelElements[4], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            elementLeft = levelMap[i, j];
                             break;
-                        case 6:
+
+                        case 6: // Power Pellet
                             Instantiate(levelElements[5], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            elementLeft = levelMap[i, j];
                             break;
-                        case 7:
-                            Instantiate(levelElements[6], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+
+                        case 7: // T-Junction
+                            if (elementLeft == 2)
+                            {
+                                Instantiate(levelElements[6], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
+                                elementLeft = levelMap[i, j];
+                            }
+                            else
+                            {
+                                Instantiate(levelElements[6], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                                elementLeft = levelMap[i, j];
+                            }
                             break;
 
                     }
