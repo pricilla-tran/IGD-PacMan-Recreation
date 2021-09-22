@@ -32,12 +32,12 @@ public class LevelGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        pacStudent.transform.position = new Vector3(-20.5f, 12.5f, 0);
+        pacStudent.transform.position = new Vector3(-12.5f, 13.5f, 0);
         // Testing initial positions
-        Ghost1.transform.position = new Vector3(-7.5f, -0.5f, 0); // Ghost 2 Position
-        Ghost2.transform.position = new Vector3(-8.5f, -1.5f, 0); // Ghost 3 Position
-        Ghost3.transform.position = new Vector3(-7.5f, -1.5f, 0); // Ghost 4 Position
-        Ghost4.transform.position = new Vector3(-8.5f, -0.5f, 0); // Ghost 1 Position
+        Ghost1.transform.position = new Vector3(0.5f, 0.5f, 0); // Ghost 2 Original Position
+        Ghost2.transform.position = new Vector3(-0.5f, -0.5f, 0); // Ghost 3 Original Position
+        Ghost3.transform.position = new Vector3(0.5f, -0.5f, 0); // Ghost 4 Original Position
+        Ghost4.transform.position = new Vector3(-0.5f, 0.5f, 0); // Ghost 1 Original Position
         //GetComponent<SpriteRenderer>().sprite = tiles[7];
     }
 
@@ -49,46 +49,52 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < levelMap.GetLength(1); j++)
             {
-                  
-                switch (levelMap[i,j])
-                {
-                    case 0: 
-                        break;
-                    case 1:
-                        Instantiate(levelElements[0], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
-                        break;
-                    case 2:
-                        Instantiate(levelElements[1], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
-                        break;
-                    case 3:
-                        Instantiate(levelElements[2], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
-                        break;
-                    case 4:
-                        Instantiate(levelElements[3], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
-                        break;
-                    case 5:
-                        Instantiate(levelElements[4], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
-                        break;
-                    case 6:
-                        Instantiate(levelElements[5], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
-                        break;
-                    case 7:
-                        Instantiate(levelElements[6], new Vector3(-21.5f + j, 13.5f - i, 0), Quaternion.identity);
-                        break;
 
-                }
-                
+                //while (i >= 0 && j >= 0)
+                //{
+                if (i >= 0 && j >= 0)
+                {
 
-                /*
-                if(levelMap[i, j] == 1)
-                {
-                    Instantiate(tiles[0], new Vector3(-21.5f + i, 13.5f + j, 0), Quaternion.identity);
+                    switch (levelMap[i, j])
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            break;
+                        case 2:
+                            Instantiate(levelElements[1], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            break;
+                        case 3:
+                            Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            break;
+                        case 4:
+                            Instantiate(levelElements[3], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            break;
+                        case 5:
+                            Instantiate(levelElements[4], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            break;
+                        case 6:
+                            Instantiate(levelElements[5], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            break;
+                        case 7:
+                            Instantiate(levelElements[6], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            break;
+
+                    }
                 }
-                if(levelMap[i, j] == 2)
-                {
-                    Instantiate(tiles[1], new Vector3(-21.5f + i, 13.5f + j, 0), Quaternion.identity);
-                }
-                */
+
+                    /*
+                    if(levelMap[i, j] == 1)
+                    {
+                        Instantiate(tiles[0], new Vector3(-21.5f + i, 13.5f + j, 0), Quaternion.identity);
+                    }
+                    if(levelMap[i, j] == 2)
+                    {
+                        Instantiate(tiles[1], new Vector3(-21.5f + i, 13.5f + j, 0), Quaternion.identity);
+                    }
+                    */
+                //}
 
             }
         }

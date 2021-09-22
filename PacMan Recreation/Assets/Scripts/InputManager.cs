@@ -22,28 +22,28 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             animatorController.SetTrigger("UpParam");
-            CreateTween(new Vector3(-20.5f, 12.5f, 0), 1.5f);
+            CreateTween(new Vector3(-12.5f, 13.5f, 0), 1.5f);
         }
 
         // (-15.5, 8.5, 0)
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             animatorController.SetTrigger("DownParam");
-            CreateTween(new Vector3(-15.5f, 8.5f, 0), 1.5f);
+            CreateTween(new Vector3(-7.5f, 9.5f, 0), 1.5f);
         }
 
         // (-20.5, 8.5, 0)
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             animatorController.SetTrigger("LeftParam");
-            CreateTween(new Vector3(-20.5f, 8.5f, 0), 1.5f);
+            CreateTween(new Vector3(-12.5f, 9.5f, 0), 1.5f);
         }
 
         // (-15.5, 12.5, 0)
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             animatorController.SetTrigger("RightParam");
-            CreateTween(new Vector3(-15.5f, 12.5f, 0), 1.5f);
+            CreateTween(new Vector3(-7.5f, 13.5f, 0), 1.5f);
         }
     }
 
