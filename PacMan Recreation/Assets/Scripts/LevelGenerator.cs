@@ -9,8 +9,9 @@ public class LevelGenerator : MonoBehaviour
     public GameObject Ghost2;
     public GameObject Ghost3;
     public GameObject Ghost4;
+    //public GameObject LevelManager;
     //public GameObject PowerPellet;
-    //private int ppCount = 0;
+    private bool powerPelletAdded = false;
     private Animator anim;
     public GameObject[] levelElements;
     private Vector3 position;
@@ -47,10 +48,17 @@ public class LevelGenerator : MonoBehaviour
         Ghost2.transform.position = new Vector3(-0.5f, -0.5f, 0); // Ghost 3 Original Position
         Ghost3.transform.position = new Vector3(0.5f, -0.5f, 0); // Ghost 4 Original Position
         Ghost4.transform.position = new Vector3(-0.5f, 0.5f, 0); // Ghost 1 Original Position
-        anim = levelElements[5].GetComponent<Animator>();
+        //Instantiate(levelElements[5], new Vector3(-13.5f + 1, 14.5f - 2, 0), Quaternion.identity);
+        //anim = levelElements[5].GetComponent<Animator>();
+        //anim = levelElements[5].GetComponent<Animator>();
         //anim = PowerPellet.gameObject.GetComponent<Animation>();
         //GetComponent<SpriteRenderer>().sprite = tiles[7];
         //animation = levelElements[5].GetComponent<Animation>();
+    }
+
+    private void Start()
+    {
+        //Instantiate(levelElements[5], new Vector3(-13.5f + 1, 14.5f - 3, 0), Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -221,11 +229,17 @@ public class LevelGenerator : MonoBehaviour
                         case 6: // Power Pellet
                             //position = new Vector3(-13.5f + j, 14.5f - i, 0);
                             //PowerPelletAnimation();
-                            Instantiate(levelElements[5], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            if (!powerPelletAdded)
+                            {
+                                Instantiate(levelElements[5], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                                elementLeft = levelMap[i, j];
+                                powerPelletAdded = true; 
+                            }
+                            //
                             //anim = levelElements[5].GetComponent<Animator>();
                             //anim.enabled = true;
                             //anim.Play("PowerPellet_Flash");
-                            elementLeft = levelMap[i, j];
+                            
                             break;
 
                         case 7: // T-Junction
@@ -243,6 +257,8 @@ public class LevelGenerator : MonoBehaviour
 
                     }
                 }
+
+                //Instantiate(LevelManager, new Vector3(0.5f, 14.5f, 0f), Quaternion.Euler(0, 180, 0));
 
                     /*
                     if(levelMap[i, j] == 1)
