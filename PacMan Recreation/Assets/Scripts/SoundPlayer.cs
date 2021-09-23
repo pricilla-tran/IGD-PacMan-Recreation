@@ -5,11 +5,14 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour
 {
     public AudioSource walkingSound;
+    public AudioSource IntroBGMusic;
+    public AudioSource BGMusic;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        IntroBGMusic.Play();
+        Invoke("PlayBG", 1.5f);
     }
 
     // Update is called once per frame
@@ -42,4 +45,10 @@ public class SoundPlayer : MonoBehaviour
     {
         walkingSound.Stop();
     }
+
+    void PlayBG()
+    {
+        BGMusic.Play();
+    }
+
 }
