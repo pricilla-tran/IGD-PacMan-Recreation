@@ -9,9 +9,9 @@ public class LevelGenerator : MonoBehaviour
     public GameObject Ghost2;
     public GameObject Ghost3;
     public GameObject Ghost4;
-    public GameObject PowerPellet;
+    //public GameObject PowerPellet;
     private int ppCount = 0;
-    private Animation anim;
+    private Animator anim;
     public GameObject[] levelElements;
     private int elementLeft;
     private int elementRight;
@@ -217,18 +217,8 @@ public class LevelGenerator : MonoBehaviour
                             break;
 
                         case 6: // Power Pellet
-                            //Instantiate(PowerPellet, new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
-                            if (ppCount >= 1)
-                            {
-                                //Instantiate(PowerPellet, new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
-                                elementLeft = levelMap[i, j];
-                            }
-                            else
-                            {
-                                levelElements[5].transform.position = new Vector3(-13.5f + j, 14.5f - i, 0);
-                                ppCount++;
-                                elementLeft = levelMap[i, j];
-                            }
+                            Instantiate(levelElements[5], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            elementLeft = levelMap[i, j];
                             break;
 
                         case 7: // T-Junction
