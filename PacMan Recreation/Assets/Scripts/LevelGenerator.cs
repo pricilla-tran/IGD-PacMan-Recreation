@@ -10,9 +10,10 @@ public class LevelGenerator : MonoBehaviour
     public GameObject Ghost3;
     public GameObject Ghost4;
     //public GameObject PowerPellet;
-    private int ppCount = 0;
+    //private int ppCount = 0;
     private Animator anim;
     public GameObject[] levelElements;
+    private Vector3 position;
     private int elementLeft;
     private int elementRight;
     private int elementUp;
@@ -46,6 +47,7 @@ public class LevelGenerator : MonoBehaviour
         Ghost2.transform.position = new Vector3(-0.5f, -0.5f, 0); // Ghost 3 Original Position
         Ghost3.transform.position = new Vector3(0.5f, -0.5f, 0); // Ghost 4 Original Position
         Ghost4.transform.position = new Vector3(-0.5f, 0.5f, 0); // Ghost 1 Original Position
+        anim = levelElements[5].GetComponent<Animator>();
         //anim = PowerPellet.gameObject.GetComponent<Animation>();
         //GetComponent<SpriteRenderer>().sprite = tiles[7];
         //animation = levelElements[5].GetComponent<Animation>();
@@ -217,7 +219,12 @@ public class LevelGenerator : MonoBehaviour
                             break;
 
                         case 6: // Power Pellet
+                            //position = new Vector3(-13.5f + j, 14.5f - i, 0);
+                            //PowerPelletAnimation();
                             Instantiate(levelElements[5], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.identity);
+                            //anim = levelElements[5].GetComponent<Animator>();
+                            //anim.enabled = true;
+                            //anim.Play("PowerPellet_Flash");
                             elementLeft = levelMap[i, j];
                             break;
 
@@ -253,4 +260,10 @@ public class LevelGenerator : MonoBehaviour
         }
         
     }
+
+    void PowerPelletAnimation()
+    {
+        Instantiate(levelElements[5], position, Quaternion.identity);
+    }
+
 }

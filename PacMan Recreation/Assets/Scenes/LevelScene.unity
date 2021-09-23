@@ -7140,7 +7140,6 @@ MonoBehaviour:
   Ghost2: {fileID: 498377827}
   Ghost3: {fileID: 937417618}
   Ghost4: {fileID: 857425196}
-  PowerPellet: {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
   levelElements:
   - {fileID: 2765353202692302852, guid: 2d56433ac1156d546964123711891303, type: 3}
   - {fileID: 6625011295020767843, guid: 45dcc68ef7bcc1843a8f3f3d03ae9ba4, type: 3}
@@ -7373,7 +7372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &827133023
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7566,7 +7565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &884184616
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8100,6 +8099,22 @@ PrefabInstance:
     - target: {fileID: 4017544954255634724, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017544954255634726, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017544954255634726, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017544954255634726, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017544954255634726, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58a16033cbde83a4a9c636f45e0ee45c, type: 3}
