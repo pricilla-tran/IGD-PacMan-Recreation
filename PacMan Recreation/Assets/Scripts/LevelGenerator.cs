@@ -198,66 +198,96 @@ public class LevelGenerator : MonoBehaviour
                             break;
 
                         case 3: // Inside Corner
-                            if (elementLeft == 4 && levelMap[i - 1, j] == 4 && levelMap[i+1, j] == 5)
+                            if (elementLeft == 4)
                             {
-                                Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180)); // 90 works for T points, 180 for big blocks
-                                elementLeft = levelMap[i, j];
-                            }
-                            
-                            else if (elementLeft == 4 && levelMap[i + 1, j] == 4 && levelMap[i - 1, j] == 3) // for bottom corner of T section 
-                            {
-                                if (j > 14)
-                                {
-                                    Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 270));
-                                    elementLeft = levelMap[i, j];
-                                }
-                                else
-                                {
-                                    Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 0));
-                                    elementLeft = levelMap[i, j];
-                                }
-                            }
-                            else if (elementLeft == 4 && levelMap[i + 1, j] == 4 && levelMap[i - 1, j] == 4) // for bottom corner of T section 
-                            {
-                                Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
-                                elementLeft = levelMap[i, j];
-                            }
-                            else if (elementLeft == 3 && levelMap[i - 1, j] == 4 && levelMap[i+1,j] == 4)
-                            {
-                                Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 270));
-                                elementLeft = levelMap[i, j];
-                            }
-                            
-                            else if (elementLeft == 3 && levelMap[i-1, j] == 4)
-                            {
-                                Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180));
-                                elementLeft = levelMap[i, j];
-                            }
-                            
-                            else if (elementLeft == 4 && levelMap[i - 1, j] == 4) // Top Corner of Side T
-                            {
-                                if (j > 14 && i < 10)
+                                if (levelMap[i - 1, j] == 4 && levelMap[i + 1, j] == 5)
                                 {
                                     Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180)); // 90 works for T points, 180 for big blocks
                                     elementLeft = levelMap[i, j];
                                 }
-                                else {
-                                    Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90)); // 90 works for T points, 180 for big blocks
+                                else if (levelMap[i + 1, j] == 4 && levelMap[i - 1, j] == 3) // for bottom corner of T section 
+                                {
+                                    if (j > 14) // Right Side Bottom Corner of T Section
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 270));
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                    else
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 0));
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                }
+                                else if (levelMap[i + 1, j] == 4 && levelMap[i - 1, j] == 4)  // for bottom corner of T section
+                                {
+                                    if (j < 14 && i > 15)
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 90));
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                    else
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                }
+                                else if (levelMap[i - 1, j] == 4) // Top Corner of Side T
+                                {
+                                    if (j > 14)
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180)); // 90 works for T points, 180 for big blocks
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                    else if (j > 14 && i > 10)
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180)); // 90 works for T points, 180 for big blocks
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                    else
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90)); // 90 works for T points, 180 for big blocks
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                }
+                                else if (levelMap[i - 1, j] == 3) // Bottom Corner of Side T
+                                {
+                                    Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180));
+                                    elementLeft = levelMap[i, j];
+                                }
+                                else
+                                {
+                                    Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
                                     elementLeft = levelMap[i, j];
                                 }
                             }
-                            else if (elementLeft == 4 && levelMap[i - 1, j] == 3) // Bottom Corner of Side T
+                            
+                            else if (elementLeft == 3)
                             {
-
-                                Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180));
-                                elementLeft = levelMap[i, j];
+                                if (levelMap[i - 1, j] == 4 && levelMap[i + 1, j] == 4)
+                                {
+                                    if (j > 13 && i > 15) // Bottom Side Corner on Bottom T 
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                    else
+                                    {
+                                        Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 270));
+                                        elementLeft = levelMap[i, j];
+                                    }
+                                }
+                                else if (levelMap[i - 1, j] == 4)
+                                {
+                                    Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180));
+                                    elementLeft = levelMap[i, j];
+                                }
+                                else // Connected Corners
+                                {
+                                    Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
+                                    elementLeft = levelMap[i, j];
+                                }
                             }
                             
-                            else if (elementLeft == 4)
-                            {
-                                Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
-                                elementLeft = levelMap[i, j];
-                            }
                             else if (levelMap[i - 1, j] == 4)
                             {
                                 Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
@@ -266,11 +296,6 @@ public class LevelGenerator : MonoBehaviour
                             else if (levelMap[i-1, j] == 3 && levelMap[i, j+1] == 4)
                             {
                                 Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 180));
-                                elementLeft = levelMap[i, j];
-                            }
-                            else if (elementLeft == 3) // Connected Corners
-                            {
-                                Instantiate(levelElements[2], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
                                 elementLeft = levelMap[i, j];
                             }
                             else
