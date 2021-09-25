@@ -52,6 +52,7 @@ public class LevelGenerator : MonoBehaviour
         {2,5,5,5,5,5,5,5,5,5,5,5,5,5, 5,5,5,5,5,5,5,5,5,5,5,5,5,2},
         {2,5,3,4,4,3,5,3,4,4,4,3,5,3, 3,5,3,4,4,4,3,5,3,4,4,3,5,2},
         {2,6,4,0,0,4,5,4,0,0,0,4,5,4, 4,5,4,0,0,0,4,5,4,0,0,4,6,2},
+        {2,5,3,4,4,3,5,3,4,4,4,3,5,4, 4,5,3,4,4,4,3,5,3,4,4,3,5,2},
         {2,5,5,5,5,5,5,5,5,5,5,5,5,4, 4,5,5,5,5,5,5,5,5,5,5,5,5,2},
         {1,2,2,2,2,2,2,2,2,2,2,2,2,7, 7,2,2,2,2,2,2,2,2,2,2,2,2,1},
         //{0,0,0,0,0,0,5,0,0,0,4,0,0,0, 0},
@@ -132,20 +133,21 @@ public class LevelGenerator : MonoBehaviour
                                     Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
                                     elementLeft = levelMap[i, j];
                                 }
+                                else  if (j < 14 & i > 25)
+                                {
+                                    Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
+                                    elementLeft = levelMap[i, j];
+                                }
                                 else
                                 {
                                     Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180));
                                     elementLeft = levelMap[i, j];
                                 }
                             }
-                            else if (elementLeft == 2 && i > 0 && levelMap[i-1, j] == 2) // OC 4 and OC 2 (but need to make a second one for that) 
-                            {
-                                Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 180));
-                                elementLeft = levelMap[i, j];
-                            }
                             
                             else if (i > 0 && levelMap[i - 1, j] == 2 && levelMap[i+1,j] == 0) // OC 4 (on the right) 
                             {
+
                                 Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
                                 elementLeft = levelMap[i, j];
                             }
@@ -154,9 +156,20 @@ public class LevelGenerator : MonoBehaviour
                                 Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 270));
                                 elementLeft = levelMap[i, j];
                             }
+
                             else if (j > 14 && elementLeft == 2) // End Corner Row 0 
                             {
                                 Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
+                                elementLeft = levelMap[i, j];
+                            }
+                            else if (i > 15 && levelMap[i-1,j] == 0 && elementLeft == 2) // OC 1 (Bottom Left) 
+                            {
+                                Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 180, 0));
+                                elementLeft = levelMap[i, j];
+                            }
+                            else if (i > 15 && elementLeft == 5 && levelMap[i-1,j] == 2)
+                            {
+                                Instantiate(levelElements[0], new Vector3(-13.5f + j, 14.5f - i, 0), Quaternion.Euler(0, 0, 90));
                                 elementLeft = levelMap[i, j];
                             }
                             else
