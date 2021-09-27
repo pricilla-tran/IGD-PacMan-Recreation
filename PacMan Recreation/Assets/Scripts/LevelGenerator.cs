@@ -82,12 +82,16 @@ public class LevelGenerator : MonoBehaviour
         Destroy(ManualLevel);
         pacStudent.transform.position = new Vector3(-12.5f, 13.5f, 0);
         // Testing initial positions
-        Ghost1.transform.position = new Vector3(0.5f, 0.5f, 0); // Ghost 2 Original Position
-        Ghost2.transform.position = new Vector3(-0.5f, -0.5f, 0); // Ghost 3 Original Position
-        Ghost3.transform.position = new Vector3(0.5f, -0.5f, 0); // Ghost 4 Original Position
-        Ghost4.transform.position = new Vector3(-0.5f, 0.5f, 0); // Ghost 1 Original Position
-        //PowerPellet.transform.position = new Vector3(-13.5f + 1, 14.5f - 3, 0);
-        
+        //Ghost1.transform.position = new Vector3(0.5f, 0.5f, 0); // Ghost 2 Original Position
+        //Ghost2.transform.position = new Vector3(-0.5f, -0.5f, 0); // Ghost 3 Original Position
+        //Ghost3.transform.position = new Vector3(0.5f, -0.5f, 0); // Ghost 4 Original Position
+        //Ghost4.transform.position = new Vector3(-0.5f, 0.5f, 0); // Ghost 1 Original Position
+        Ghost1.transform.position = new Vector3(-0.5f, 0.5f, 0); 
+        Ghost2.transform.position = new Vector3(0.5f, 0.5f, 0); 
+        Ghost3.transform.position = new Vector3(-0.5f, -0.5f, 0); 
+        Ghost4.transform.position = new Vector3(0.5f, -0.5f, 0); 
+                                                                 //PowerPellet.transform.position = new Vector3(-13.5f + 1, 14.5f - 3, 0);
+
         // This is for Case 6 Power Pellet 
         for (int m = 0; m < levelMap.GetLength(0); m++)
         {
