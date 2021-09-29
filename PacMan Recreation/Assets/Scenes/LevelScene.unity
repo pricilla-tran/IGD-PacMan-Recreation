@@ -7800,8 +7800,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1598967677}
-  - component: {fileID: 1598967676}
-  - component: {fileID: 1598967675}
   m_Layer: 0
   m_Name: TweenManager
   m_TagString: Untagged
@@ -7809,32 +7807,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1598967675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598967674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50cf99ad1a9496f4b94ad8048c993bfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1598967676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598967674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5278fcf993c94da41bfd87ecc961be82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 2047062869}
-  animatorController: {fileID: 2047062870}
 --- !u!4 &1598967677
 Transform:
   m_ObjectHideFlags: 0
@@ -8033,11 +8005,6 @@ GameObject:
 --- !u!1 &2047062869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9113971064546802116, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
-  m_PrefabInstance: {fileID: 1802929021}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &2047062870 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9113971064546802119, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
   m_PrefabInstance: {fileID: 1802929021}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2047062873
