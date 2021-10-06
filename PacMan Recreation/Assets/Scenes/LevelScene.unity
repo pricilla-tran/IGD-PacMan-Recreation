@@ -9877,6 +9877,49 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1895303205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1895303207}
+  - component: {fileID: 1895303206}
+  m_Layer: 0
+  m_Name: TweenManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1895303206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895303205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50cf99ad1a9496f4b94ad8048c993bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1895303207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895303205}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 630.51495, y: 440.0697, z: -2.4602194}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1919934648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 646491035692771824, guid: 984239b04880e4244a8d06f152a5ef8f, type: 3}
@@ -9892,6 +9935,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9113971064546802116, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
   m_PrefabInstance: {fileID: 1802929021}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2047062870 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9113971064546802119, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
+  m_PrefabInstance: {fileID: 1802929021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2047062873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9901,9 +9949,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2047062869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62997d537e742a54084178238543c079, type: 3}
+  m_Script: {fileID: 11500000, guid: c5424508db4a61c4dbe6dc54e679c852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pacStudentAnimator: {fileID: 2047062870}
+  walkSpeed: 1
   walkingSound: {fileID: 1397465761}
   IntroBGMusic: {fileID: 827133023}
   BGMusic: {fileID: 884184616}

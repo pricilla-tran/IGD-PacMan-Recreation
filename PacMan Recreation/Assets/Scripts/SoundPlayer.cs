@@ -7,9 +7,9 @@ public class SoundPlayer : MonoBehaviour
     public AudioSource walkingSound;
     public AudioSource IntroBGMusic;
     public AudioSource BGMusic;
-    private float soundTimer = 0f;
-    const float moveWait = 2.0f;
-    private int moveCycle = 0;
+    //private float soundTimer = 0f;
+    //const float moveWait = 2.0f;
+    //private int moveCycle = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,7 @@ public class SoundPlayer : MonoBehaviour
 
     void PlayWalkingSound()
     {
+        /*
         soundTimer += Time.deltaTime;
         if ((int)soundTimer == (int)moveWait && moveCycle == 0)
         {
@@ -66,6 +67,7 @@ public class SoundPlayer : MonoBehaviour
             Invoke("StopSound", 1.5f);
             moveCycle = 0;
         }
+        */
 
     }
 
