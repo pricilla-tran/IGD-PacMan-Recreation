@@ -14,6 +14,8 @@ public class PacStudentController : MonoBehaviour
     public AudioSource BGMusic;
     private Tweener tweener;
     private Vector3 playerInitialPos;
+    private Quaternion initialRotation;
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +32,27 @@ public class PacStudentController : MonoBehaviour
     {
         GetMovementInput();
         CharacterPosition();
-        CharacterRotation();
+        //CharacterRotation();
         WalkingAnimation();
+        WalkingAudio();
+
+        if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") == -1)
+        {
+            StartCoroutine(CharacterRotate(45.0f));
+        }
+        else if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") == 1)
+        {
+            StartCoroutine(CharacterRotate(-135.0f));
+        }
+        else if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") == 1)
+        {
+            StartCoroutine(CharacterRotate(-45.0f));
+        }
+        else if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") == -1)
+        {
+            StartCoroutine(CharacterRotate(135.0f));
+        }
+
     }
 
     void PlayBG()
@@ -54,48 +75,28 @@ public class PacStudentController : MonoBehaviour
 
     void CharacterRotation()
     {
-        //Vector3 relativePos = movement - transform.position;
-        //Quaternion.LookRotation();
-        
+        timer += Time.deltaTime;
+
         if (movement != playerInitialPos)
         {
             // Find a way to make it fixed at 90 degrees 
-            rotation = Quaternion.FromToRotation(gameObject.transform.position, movement);
-            //rotation = transform.rotation * Quaternion.Euler(0.0f, 0.0f, 90); 
-            gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, rotation, walkSpeed);
+            //rotation = Quaternion.FromToRotation(gameObject.transform.position, movement * 90);
+            rotation = transform.rotation * Quaternion.Euler(0.0f, 0.0f, 90); 
+            gameObject.transform.rotation = Quaternion.Lerp(transform.rotation, rotation, walkSpeed);
             
         }
-        
 
-        /*
-        if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") == -1 && !Input.GetButton("Horizontal"))
+    }
+
+    private IEnumerator CharacterRotate(float angle)
+    {
+        if (movement != playerInitialPos)
         {
-            pacStudentAnimator.SetTrigger("UpParam");
-            //CreateTween(movement, 1.5f);
+            float currRot = gameObject.transform.rotation.eulerAngles.z;
+            rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            gameObject.transform.rotation = rotation;
         }
-
-        // (-15.5, 8.5, 0)
-        else if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") == 1 && !Input.GetButton("Horizontal"))
-        {
-            pacStudentAnimator.SetTrigger("DownParam");
-            //CreateTween(new Vector3(-7.5f, 9.5f, 0), 1.5f);
-        }
-
-        // Left
-        else if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == -1 && !Input.GetButton("Vertical"))
-        {
-            pacStudentAnimator.SetTrigger("LeftParam");
-            //CreateTween(new Vector3(-12.5f, 9.5f, 0), 1.5f);
-        }
-
-        // Right
-        else if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == 1 && !Input.GetButton("Vertical"))
-        {
-            pacStudentAnimator.SetTrigger("RightParam");
-            //CreateTween(new Vector3(-7.5f, 13.5f, 0), 1.5f);
-        }
-        */
-
+        yield return new WaitForSeconds(0.5f);
     }
 
     void WalkingAnimation()
@@ -108,7 +109,17 @@ public class PacStudentController : MonoBehaviour
 
     void WalkingAudio()
     {
-
+        if (movementSqrMagnitude > 0.25f && !walkingSound.isPlaying)
+        {
+            walkingSound.volume = movementSqrMagnitude;
+            walkingSound.Play();
+            BGMusic.volume = 0.2f;
+        }
+        else if (movementSqrMagnitude <= 0.3f && walkingSound.isPlaying)
+        {
+            walkingSound.Stop();
+            BGMusic.volume = 0.5f;
+        }
     }
 
     public void CreateTween(Vector3 endPosition, float duration)

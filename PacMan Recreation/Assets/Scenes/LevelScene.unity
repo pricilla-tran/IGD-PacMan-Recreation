@@ -8153,7 +8153,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f3de06a2c6636c84e9dd203b3afbb254, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -9015,7 +9015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1397465761
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9961,7 +9961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pacStudentAnimator: {fileID: 2047062870}
-  walkSpeed: 1
+  walkSpeed: 1.75
   walkingSound: {fileID: 1397465761}
   IntroBGMusic: {fileID: 827133023}
   BGMusic: {fileID: 884184616}
