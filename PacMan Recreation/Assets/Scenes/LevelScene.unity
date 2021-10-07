@@ -9675,6 +9675,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9113971064546802119, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
+      propertyPath: m_CullingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9113971064546802119, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
 --- !u!1 &1813340478

@@ -8,7 +8,7 @@ public class PacStudentController : MonoBehaviour
     private float movementSqrMagnitude;
     private Quaternion rotation;
     public Animator pacStudentAnimator;
-    public float walkSpeed = 1.0f;
+    public float walkSpeed = 1.75f;
     public AudioSource walkingSound;
     public AudioSource IntroBGMusic;
     public AudioSource BGMusic;
@@ -22,6 +22,7 @@ public class PacStudentController : MonoBehaviour
         playerInitialPos = new Vector3(-12.5f, 13.5f, 0);
         tweener = gameObject.GetComponent<Tweener>();
         Invoke("PlayBG", 1.5f);
+        gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -45);
     }
 
     // Update is called once per frame
@@ -30,6 +31,7 @@ public class PacStudentController : MonoBehaviour
         GetMovementInput();
         CharacterPosition();
         CharacterRotation();
+        WalkingAnimation();
     }
 
     void PlayBG()
@@ -54,47 +56,59 @@ public class PacStudentController : MonoBehaviour
     {
         //Vector3 relativePos = movement - transform.position;
         //Quaternion.LookRotation();
-        /*
+        
         if (movement != playerInitialPos)
         {
+            // Find a way to make it fixed at 90 degrees 
             rotation = Quaternion.FromToRotation(gameObject.transform.position, movement);
-            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, rotation, walkSpeed);
-            //pacStudentAnimator.SetTrigger("RightParam");
+            //rotation = transform.rotation * Quaternion.Euler(0.0f, 0.0f, 90); 
+            gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, rotation, walkSpeed);
+            
         }
-        */
-        if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0)
+        
+
+        /*
+        if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") == -1 && !Input.GetButton("Horizontal"))
         {
             pacStudentAnimator.SetTrigger("UpParam");
             //CreateTween(movement, 1.5f);
         }
 
         // (-15.5, 8.5, 0)
-        else if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") < 0)
+        else if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") == 1 && !Input.GetButton("Horizontal"))
         {
             pacStudentAnimator.SetTrigger("DownParam");
             //CreateTween(new Vector3(-7.5f, 9.5f, 0), 1.5f);
         }
 
-        // (-20.5, 8.5, 0)
-        else if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") < 0)
+        // Left
+        else if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == -1 && !Input.GetButton("Vertical"))
         {
             pacStudentAnimator.SetTrigger("LeftParam");
             //CreateTween(new Vector3(-12.5f, 9.5f, 0), 1.5f);
         }
 
-        // (-15.5, 12.5, 0)
-        else if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") > 0)
+        // Right
+        else if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == 1 && !Input.GetButton("Vertical"))
         {
             pacStudentAnimator.SetTrigger("RightParam");
             //CreateTween(new Vector3(-7.5f, 13.5f, 0), 1.5f);
         }
+        */
 
     }
 
     void WalkingAnimation()
     {
-        pacStudentAnimator = gameObject.GetComponent<Animator>();
-        pacStudentAnimator.SetFloat("MoveSpeed", movementSqrMagnitude);
+        //pacStudentAnimator = gameObject.GetComponent<Animator>();
+        //pacStudentAnimator.SetFloat("MoveSpeed", movementSqrMagnitude);
+        //if
+        pacStudentAnimator.speed = movementSqrMagnitude;
+    }
+
+    void WalkingAudio()
+    {
+
     }
 
     public void CreateTween(Vector3 endPosition, float duration)
