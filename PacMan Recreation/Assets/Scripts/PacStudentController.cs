@@ -36,13 +36,15 @@ public class PacStudentController : MonoBehaviour
         WalkingAnimation();
         WalkingAudio();
 
-        if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") == -1)
+        if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == -1)
         {
             StartCoroutine(CharacterRotate(45.0f));
+            //StartCoroutine(CharacterMove(movement));
         }
-        else if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") == 1)
+        else if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == 1)
         {
             StartCoroutine(CharacterRotate(-135.0f));
+            //StartCoroutine(CharacterMove(movement));
         }
         else if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") == 1)
         {
@@ -62,20 +64,35 @@ public class PacStudentController : MonoBehaviour
 
     void GetMovementInput()
     {
-        movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        timer += Time.deltaTime;
+        movement = new Vector3((int) Input.GetAxis("Horizontal"), (int)Input.GetAxis("Vertical"), 0);
         movement = Vector3.ClampMagnitude(movement, 1.0f);
         movementSqrMagnitude = movement.sqrMagnitude;
         //Debug.Log(movement);
+        //CreateTween(movement, 1.5f);
     }
 
     void CharacterPosition()
     {
-        gameObject.transform.Translate(walkSpeed * movement * Time.deltaTime, Space.World);
+        //gameObject.transform.Translate(walkSpeed * movement * Time.deltaTime, Space.World);
+        CreateTween(gameObject.transform.position + movement, walkSpeed);
+
+    }
+
+    private IEnumerator CharacterMove(Vector3 endPos)
+    {
+        //if (movement != playerInitialPos)
+        //{
+        //CreateTween(movement, walkSpeed);
+        //gameObject.transform.Translate(walkSpeed * movement * Time.deltaTime, Space.World);
+        //}
+        CreateTween(gameObject.transform.position + movement, walkSpeed);
+        yield return new WaitForSeconds(walkSpeed);
     }
 
     void CharacterRotation()
     {
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
 
         if (movement != playerInitialPos)
         {

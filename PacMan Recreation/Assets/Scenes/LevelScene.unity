@@ -9965,6 +9965,18 @@ MonoBehaviour:
   walkingSound: {fileID: 1397465761}
   IntroBGMusic: {fileID: 827133023}
   BGMusic: {fileID: 884184616}
+--- !u!114 &2047062874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047062869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50cf99ad1a9496f4b94ad8048c993bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2074683041
 PrefabInstance:
   m_ObjectHideFlags: 0
