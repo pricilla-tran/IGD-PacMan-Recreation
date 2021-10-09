@@ -17,6 +17,7 @@ public class PacStudentController : MonoBehaviour
     private string lastInput;
     private string currentInput;
     private float timer;
+    public ParticleSystem dust;
 
     // Start is called before the first frame update
     void Start()
@@ -145,12 +146,12 @@ public class PacStudentController : MonoBehaviour
         else if (currentInput == "left")
         {
             CreateTween(gameObject.transform.position + movement, walkSpeed);
-            yield return new WaitForSeconds(walkSpeed);
+            yield return new WaitForSeconds(0.5f);
         }
         else if (currentInput == "right")
         {
             CreateTween(gameObject.transform.position + movement, walkSpeed);
-            yield return new WaitForSeconds(walkSpeed);
+            yield return new WaitForSeconds(0.5f);
         }
 
         
@@ -196,11 +197,13 @@ public class PacStudentController : MonoBehaviour
         {
             walkingSound.volume = movementSqrMagnitude;
             walkingSound.Play();
+            dust.Play();
             BGMusic.volume = 0.2f;
         }
         else if (movementSqrMagnitude <= 0.3f && walkingSound.isPlaying)
         {
             walkingSound.Stop();
+            dust.Stop();
             BGMusic.volume = 0.5f;
         }
     }

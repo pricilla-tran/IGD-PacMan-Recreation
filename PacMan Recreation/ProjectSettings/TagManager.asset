@@ -11,7 +11,7 @@ TagManager:
   - PacStudent
   - Water
   - UI
-  - 
+  - Ghost
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: PacStudent
     uniqueID: 1505477365
+    locked: 0
+  - name: Ghost
+    uniqueID: 590055273
     locked: 0
   - name: Default
     uniqueID: 0
