@@ -14715,7 +14715,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1895303207}
   - component: {fileID: 1895303206}
-  m_Layer: 0
+  - component: {fileID: 1895303208}
+  m_Layer: 3
   m_Name: TweenManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14748,6 +14749,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1895303208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895303205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9990e646056abed4e9694698862e7b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cherry: {fileID: 4881490242483488703, guid: 85bb644d2bd2f26459b2e3c3791c4ea3, type: 3}
 --- !u!1 &1919934648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 646491035692771824, guid: 984239b04880e4244a8d06f152a5ef8f, type: 3}

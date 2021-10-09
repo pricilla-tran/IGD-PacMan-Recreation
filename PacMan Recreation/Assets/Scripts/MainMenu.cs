@@ -11,8 +11,8 @@ public class MainMenu : MonoBehaviour
     public Button lvl2Button;
     public GameObject[] pizza;
     private float timer;
-    private float moveWait = 1.5f;
-    private float moveCycle;
+    //private float moveWait = 1.5f;
+    //private float moveCycle;
     private Tweener BGTweener;
 
     // Start is called before the first frame update
