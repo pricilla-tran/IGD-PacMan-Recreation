@@ -14,7 +14,8 @@ public class PacStudentController : MonoBehaviour
     public AudioSource BGMusic;
     private Tweener tweener;
     private Vector3 playerInitialPos;
-    private Quaternion initialRotation;
+    private string lastInput;
+    private string currentInput;
     private float timer;
 
     // Start is called before the first frame update
@@ -31,28 +32,45 @@ public class PacStudentController : MonoBehaviour
     void Update()
     {
         GetMovementInput();
-        CharacterPosition();
+        //CharacterPosition();
         //CharacterRotation();
         WalkingAnimation();
         WalkingAudio();
 
+        // Left
         if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == -1)
         {
             StartCoroutine(CharacterRotate(45.0f));
             //StartCoroutine(CharacterMove(movement));
+            lastInput = "left";
+            //CharacterPosition();
+            StartCoroutine(CharacterMove(movement));
+
         }
+        // Right
         else if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == 1)
         {
             StartCoroutine(CharacterRotate(-135.0f));
             //StartCoroutine(CharacterMove(movement));
+            lastInput = "right";
+            CharacterPosition();
+            //StartCoroutine(CharacterMove(movement));
         }
-        else if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") == 1)
+        // Up
+        else if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") == 1)
         {
             StartCoroutine(CharacterRotate(-45.0f));
+            lastInput = "up";
+            CharacterPosition();
+            //StartCoroutine(CharacterMove(movement));
         }
-        else if (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") == -1)
+        // Down
+        else if (Input.GetButton("Vertical") && Input.GetAxisRaw("Vertical") == -1)
         {
             StartCoroutine(CharacterRotate(135.0f));
+            lastInput = "down";
+            CharacterPosition();
+            //StartCoroutine(CharacterMove(movement));
         }
 
     }
@@ -75,7 +93,34 @@ public class PacStudentController : MonoBehaviour
     void CharacterPosition()
     {
         //gameObject.transform.Translate(walkSpeed * movement * Time.deltaTime, Space.World);
-        CreateTween(gameObject.transform.position + movement, walkSpeed);
+        //CreateTween(gameObject.transform.position + movement, walkSpeed);
+        
+        if (lastInput == "up")
+        {
+            //CreateTween(gameObject.transform.position + movement, walkSpeed);
+            //if (gameObject.transform.position + Vector3.forward)
+            currentInput = "up";
+            StartCoroutine(CharacterMove(movement));
+        }
+        else if (lastInput == "down")
+        {
+            //CreateTween(gameObject.transform.position + movement, walkSpeed);
+            currentInput = "down";
+            StartCoroutine(CharacterMove(movement));
+        }
+        else if (lastInput == "left")
+        {
+            //CreateTween(gameObject.transform.position + Vector3.left, walkSpeed);
+            currentInput = "left";
+            StartCoroutine(CharacterMove(movement));
+        }
+        else if (lastInput == "right")
+        {
+            currentInput = "right";
+            StartCoroutine(CharacterMove(movement));
+            //CreateTween(gameObject.transform.position + Vector3.right, walkSpeed);
+        }
+        
 
     }
 
@@ -86,8 +131,29 @@ public class PacStudentController : MonoBehaviour
         //CreateTween(movement, walkSpeed);
         //gameObject.transform.Translate(walkSpeed * movement * Time.deltaTime, Space.World);
         //}
-        CreateTween(gameObject.transform.position + movement, walkSpeed);
-        yield return new WaitForSeconds(walkSpeed);
+        //CreateTween(gameObject.transform.position + movement, walkSpeed);
+        if (currentInput == "up")
+        {
+            CreateTween(gameObject.transform.position + movement, walkSpeed);
+            yield return new WaitForSeconds(walkSpeed);
+        }
+        else if (currentInput == "down")
+        {
+            CreateTween(gameObject.transform.position + movement, walkSpeed);
+            yield return new WaitForSeconds(walkSpeed);
+        }
+        else if (currentInput == "left")
+        {
+            CreateTween(gameObject.transform.position + movement, walkSpeed);
+            yield return new WaitForSeconds(walkSpeed);
+        }
+        else if (currentInput == "right")
+        {
+            CreateTween(gameObject.transform.position + movement, walkSpeed);
+            yield return new WaitForSeconds(walkSpeed);
+        }
+
+        
     }
 
     void CharacterRotation()
