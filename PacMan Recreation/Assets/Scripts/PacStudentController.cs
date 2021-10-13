@@ -18,6 +18,7 @@ public class PacStudentController : MonoBehaviour
     private string currentInput;
     private float timer;
     public ParticleSystem dust;
+    private Rigidbody2D playerRB;
 
     // Start is called before the first frame update
     void Start()
@@ -95,7 +96,9 @@ public class PacStudentController : MonoBehaviour
     {
         //gameObject.transform.Translate(walkSpeed * movement * Time.deltaTime, Space.World);
         //CreateTween(gameObject.transform.position + movement, walkSpeed);
-        
+        //RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1.5f, LayerMask.GetMask("Map"));
+
+        //if ()
         if (lastInput == "up")
         {
             //CreateTween(gameObject.transform.position + movement, walkSpeed);
@@ -121,6 +124,10 @@ public class PacStudentController : MonoBehaviour
             StartCoroutine(CharacterMove(movement));
             //CreateTween(gameObject.transform.position + Vector3.right, walkSpeed);
         }
+        else
+        {
+            
+        }
         
 
     }
@@ -133,25 +140,41 @@ public class PacStudentController : MonoBehaviour
         //gameObject.transform.Translate(walkSpeed * movement * Time.deltaTime, Space.World);
         //}
         //CreateTween(gameObject.transform.position + movement, walkSpeed);
-        if (currentInput == "up")
+
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1f, LayerMask.GetMask("Map"));
+
+
+        if (currentInput == "up" && hit.collider == null)
         {
-            CreateTween(gameObject.transform.position + movement, walkSpeed);
-            yield return new WaitForSeconds(walkSpeed);
+            if (hit.collider == null)
+            {
+                CreateTween(gameObject.transform.position + movement, walkSpeed);
+                yield return new WaitForSeconds(walkSpeed);
+            }
         }
-        else if (currentInput == "down")
+        else if (currentInput == "down" && hit.collider == null)
         {
-            CreateTween(gameObject.transform.position + movement, walkSpeed);
-            yield return new WaitForSeconds(walkSpeed);
+            if (hit.collider == null)
+            {
+                CreateTween(gameObject.transform.position + movement, walkSpeed);
+                yield return new WaitForSeconds(walkSpeed);
+            }
         }
-        else if (currentInput == "left")
+        else if (currentInput == "left" && hit.collider == null)
         {
-            CreateTween(gameObject.transform.position + movement, walkSpeed);
-            yield return new WaitForSeconds(0.5f);
+            if (hit.collider == null)
+            {
+                CreateTween(gameObject.transform.position + movement, walkSpeed);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
-        else if (currentInput == "right")
+        else if (currentInput == "right" && hit.collider == null)
         {
-            CreateTween(gameObject.transform.position + movement, walkSpeed);
-            yield return new WaitForSeconds(0.5f);
+            if (hit.collider == null)
+            {
+                CreateTween(gameObject.transform.position + movement, walkSpeed);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
 
         
@@ -193,14 +216,14 @@ public class PacStudentController : MonoBehaviour
 
     void WalkingAudio()
     {
-        if (movementSqrMagnitude > 0.25f && !walkingSound.isPlaying)
+        if (movementSqrMagnitude > 0.25f && !walkingSound.isPlaying && !dust.isPlaying)
         {
             walkingSound.volume = movementSqrMagnitude;
             walkingSound.Play();
             dust.Play();
             BGMusic.volume = 0.2f;
         }
-        else if (movementSqrMagnitude <= 0.3f && walkingSound.isPlaying)
+        else if (movementSqrMagnitude <= 0.3f && walkingSound.isPlaying && dust.isPlaying)
         {
             walkingSound.Stop();
             dust.Stop();
@@ -210,7 +233,10 @@ public class PacStudentController : MonoBehaviour
 
     public void CreateTween(Vector3 endPosition, float duration)
     {
-        bool addedTween = tweener.AddTween(gameObject.transform, gameObject.transform.position, endPosition, duration);   
+        if (endPosition.x > -13.5f && endPosition.x < 13.5f && endPosition.y > -14.5f && endPosition.y < 14.5f)
+        {
+            bool addedTween = tweener.AddTween(gameObject.transform, gameObject.transform.position, endPosition, duration);
+        }
     }
 
 }
