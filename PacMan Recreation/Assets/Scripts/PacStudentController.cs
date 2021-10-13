@@ -28,6 +28,7 @@ public class PacStudentController : MonoBehaviour
         tweener = gameObject.GetComponent<Tweener>();
         Invoke("PlayBG", 1.5f);
         gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -45);
+        playerRB = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -175,6 +176,10 @@ public class PacStudentController : MonoBehaviour
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
                 yield return new WaitForSeconds(0.5f);
             }
+        }
+        else
+        {
+            
         }
 
         
