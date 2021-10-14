@@ -19,6 +19,7 @@ public class PacStudentController : MonoBehaviour
     private float timer;
     public ParticleSystem dust;
     private Rigidbody2D playerRB;
+    public AudioSource wallHitSound;
 
     // Start is called before the first frame update
     void Start()
@@ -125,10 +126,6 @@ public class PacStudentController : MonoBehaviour
             StartCoroutine(CharacterMove(movement));
             //CreateTween(gameObject.transform.position + Vector3.right, walkSpeed);
         }
-        else
-        {
-            
-        }
         
 
     }
@@ -143,11 +140,13 @@ public class PacStudentController : MonoBehaviour
             {
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
                 yield return new WaitForSeconds(walkSpeed);
+                //WalkingAudio();
+                
             }
             else
             {
-                walkingSound.Stop();
-                dust.Stop();
+                pacStudentAnimator.speed = 0;
+                wallHitSound.Play();
             }
         }
         else if (currentInput == "down")
@@ -157,26 +156,32 @@ public class PacStudentController : MonoBehaviour
             {
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
                 yield return new WaitForSeconds(walkSpeed);
+                //WalkingAudio();
+                
             }
             else
             {
-                walkingSound.Stop();
-                dust.Stop();
+                //walkingSound.Stop();
+                //dust.Stop();
                 pacStudentAnimator.speed = 0;
+                wallHitSound.Play();
             }
         }
         else if (currentInput == "left")
         {
             RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1.1f, LayerMask.GetMask("Wall"));
+            //Debug.DrawRay(gameObject.transform.position, Vector2.left);
             if (hit.collider == null)
             {
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(walkSpeed);
+                //WalkingAudio();
+
             }
             else
             {
-                walkingSound.Stop();
-                dust.Stop();
+                pacStudentAnimator.speed = 0;
+                wallHitSound.Play();
             }
         }
         else if (currentInput == "right")
@@ -185,16 +190,22 @@ public class PacStudentController : MonoBehaviour
             if (hit.collider == null)
             {
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(walkSpeed);
+                //WalkingAudio();
+                
             }
             else
             {
-                walkingSound.Stop();
-                dust.Stop();
+                //wallHitSound.Play();
+                pacStudentAnimator.speed = 0;
+                //wallHitSound.volume = movementSqrMagnitude;
+                wallHitSound.Play();
             }
         }
         
     }
+
+   
 
     void CharacterRotation()
     {
@@ -232,12 +243,15 @@ public class PacStudentController : MonoBehaviour
 
     void WalkingAudio()
     {
-        if (movementSqrMagnitude > 0.25f && !walkingSound.isPlaying && !dust.isPlaying)
+        if (movementSqrMagnitude > 0.25f)
         {
-            walkingSound.volume = movementSqrMagnitude;
-            walkingSound.Play();
-            dust.Play();
-            BGMusic.volume = 0.2f;
+            if (!walkingSound.isPlaying && !dust.isPlaying)
+            {
+                walkingSound.volume = movementSqrMagnitude;
+                walkingSound.Play();
+                dust.Play();
+                BGMusic.volume = 0.2f;
+            }
         }
         else if (movementSqrMagnitude <= 0.3f && walkingSound.isPlaying && dust.isPlaying)
         {
