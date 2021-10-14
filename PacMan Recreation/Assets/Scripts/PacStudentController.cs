@@ -135,53 +135,64 @@ public class PacStudentController : MonoBehaviour
 
     private IEnumerator CharacterMove(Vector3 endPos)
     {
-        //if (movement != playerInitialPos)
-        //{
-        //CreateTween(movement, walkSpeed);
-        //gameObject.transform.Translate(walkSpeed * movement * Time.deltaTime, Space.World);
-        //}
-        //CreateTween(gameObject.transform.position + movement, walkSpeed);
 
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1f, LayerMask.GetMask("Map"));
-
-
-        if (currentInput == "up" && hit.collider == null)
+        if (currentInput == "up")
         {
-            if (hit.collider == null)
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1.1f, LayerMask.GetMask("Wall"));
+            if (hit.rigidbody == null)
             {
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
                 yield return new WaitForSeconds(walkSpeed);
             }
+            else
+            {
+                walkingSound.Stop();
+                dust.Stop();
+            }
         }
-        else if (currentInput == "down" && hit.collider == null)
+        else if (currentInput == "down")
         {
-            if (hit.collider == null)
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1.1f, LayerMask.GetMask("Wall"));
+            if (hit.rigidbody == null)
             {
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
                 yield return new WaitForSeconds(walkSpeed);
             }
+            else
+            {
+                walkingSound.Stop();
+                dust.Stop();
+                pacStudentAnimator.speed = 0;
+            }
         }
-        else if (currentInput == "left" && hit.collider == null)
+        else if (currentInput == "left")
         {
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1.1f, LayerMask.GetMask("Wall"));
             if (hit.collider == null)
             {
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
                 yield return new WaitForSeconds(0.5f);
             }
+            else
+            {
+                walkingSound.Stop();
+                dust.Stop();
+            }
         }
-        else if (currentInput == "right" && hit.collider == null)
+        else if (currentInput == "right")
         {
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1.1f, LayerMask.GetMask("Wall"));
             if (hit.collider == null)
             {
                 CreateTween(gameObject.transform.position + movement, walkSpeed);
                 yield return new WaitForSeconds(0.5f);
             }
+            else
+            {
+                walkingSound.Stop();
+                dust.Stop();
+            }
         }
-        else
-        {
-            
-        }
-
         
     }
 
