@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     private static int highScore;
-    private static int currentScore = 0;
+    private static int currentScore;
     public Text highScoreText;
     public Text highScoreTimeText;
     private float startTime;
@@ -19,6 +19,7 @@ public class ScoreManager : MonoBehaviour
     {
         highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         highScore = PlayerPrefs.GetInt("HighScore", 0);
+        currentScore = PlayerPrefs.GetInt("Score", 0);
         startTime = Time.time;
         minutes = Mathf.Floor(startTime / 60);
         seconds = Mathf.Floor(startTime % 60);
@@ -42,7 +43,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public static int CurrentScore
+    public static int CurrentScoreKeeper
     {
         get
         {

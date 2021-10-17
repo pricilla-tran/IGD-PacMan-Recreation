@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PacStudentController : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class PacStudentController : MonoBehaviour
     public ParticleSystem dust;
     private Rigidbody2D playerRB;
     public AudioSource wallHitSound;
+    private float score;
+    private Vector3Int playerCurrentPos;
+    public Tilemap pelletMap;
 
     // Start is called before the first frame update
     void Start()
@@ -77,6 +81,27 @@ public class PacStudentController : MonoBehaviour
             //StartCoroutine(CharacterMove(movement));
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Pellet")
+        {
+            score = score + 10;
+            //Destroy(collision.gameObject);
+            //playerCurrentPos = pelletMap.WorldToCell(collision.gameObject.tr.position);
+            //foreach (ContactPoint2D hit in collision.co)
+            //{
+                Debug.Log(collision);
+                pelletMap.SetTile(pelletMap.WorldToCell(gameObject.transform.position), null);
+            //}
+        }
+        
+    }
+
+    public void SaveScore()
+    {
+        PlayerPrefs.SetInt("Score", ScoreManager.CurrentScoreKeeper);
     }
 
     void PlayBG()
