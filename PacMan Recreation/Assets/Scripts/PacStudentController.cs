@@ -93,11 +93,13 @@ public class PacStudentController : MonoBehaviour
             //foreach (ContactPoint2D hit in collision.co)
             //{
                 Debug.Log(collision);
-                pelletMap.SetTile(pelletMap.WorldToCell(gameObject.transform.position), null);
+                pelletMap.SetTile(pelletMap.WorldToCell(collision.transform.position), null);
             //}
         }
         
     }
+
+    //TilemapCollider2D.OnTriggerEnter
 
     public void SaveScore()
     {
