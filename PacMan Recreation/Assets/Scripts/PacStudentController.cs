@@ -24,6 +24,7 @@ public class PacStudentController : MonoBehaviour
     private float score;
     private Vector3Int playerCurrentPos;
     public Tilemap pelletMap;
+    //public Tile empty;
 
     // Start is called before the first frame update
     void Start()
@@ -89,16 +90,46 @@ public class PacStudentController : MonoBehaviour
         {
             score = score + 10;
             //Destroy(collision.gameObject);
-            //playerCurrentPos = pelletMap.WorldToCell(collision.gameObject.tr.position);
+            playerCurrentPos = pelletMap.WorldToCell(collision.transform.position);
             //foreach (ContactPoint2D hit in collision.co)
             //{
-                Debug.Log(collision);
-                pelletMap.SetTile(pelletMap.WorldToCell(collision.transform.position), null);
+                //Debug.Log(collision);
+                pelletMap.SetTile(pelletMap.WorldToCell(playerCurrentPos), null);
             //}
+        }
+
+        if (collision.tag == "Teleporter")
+        {
+            if (gameObject.transform.position.x < -13.5 && currentInput == "left")
+            {
+                gameObject.transform.position = new Vector3 (13.5f, gameObject.transform.position.y, 0);
+            }
+            else if (gameObject.transform.position.x < -13.5 && currentInput == "right")
+            {
+                gameObject.transform.position = new Vector3(-13.5f, gameObject.transform.position.y, 0);
+            }
         }
         
     }
-
+    /*
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Pellet"))
+        {
+            score = score + 10;
+            //Destroy(collision.gameObject);
+            Vector3 hitPosition = Vector3.zero;
+            playerCurrentPos = pelletMap.WorldToCell(collision.gameObject.transform.position);
+            foreach (ContactPoint2D hit in collision.contacts)
+            {
+                //Debug.Log(collision);
+                hitPosition.x = hit.point.x - 0.01f;
+                hitPosition.y = hit.point.y - 0.01f;
+                pelletMap.SetTile(pelletMap.WorldToCell(hitPosition), null);
+            }
+        }
+    }
+    */
     //TilemapCollider2D.OnTriggerEnter
 
     public void SaveScore()
