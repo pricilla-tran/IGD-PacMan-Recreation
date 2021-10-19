@@ -6340,7 +6340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &641022370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14470,7 +14470,7 @@ Tilemap:
       - {fileID: -671317945438955680, guid: 0e13833679d203449bdebed5ba9f3ed8, type: 3}
       - {fileID: 4279041063238034502, guid: 9080d41aec4529246b88055a655f28d6, type: 3}
       - {fileID: -671317945438955680, guid: 0e13833679d203449bdebed5ba9f3ed8, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 12, y: -12, z: 0}
@@ -20395,11 +20395,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9113971064546802113, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5
+      value: -8.5
       objectReference: {fileID: 0}
     - target: {fileID: 9113971064546802113, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9113971064546802113, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
       propertyPath: m_LocalPosition.z

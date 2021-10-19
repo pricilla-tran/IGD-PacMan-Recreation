@@ -50,12 +50,6 @@ public class PelletSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         for (int i = 0; i < levelMap.GetLength(0); i++)
         {
             for (int j = 0; j < levelMap.GetLength(1); j++)
@@ -95,6 +89,12 @@ public class PelletSpawner : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
 
     }
 
