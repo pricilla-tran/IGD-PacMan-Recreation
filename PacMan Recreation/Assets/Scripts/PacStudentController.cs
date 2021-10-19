@@ -117,18 +117,18 @@ public class PacStudentController : MonoBehaviour
                 score += 10;
             }
             */
-            //playerCurrentPos = pelletMap.WorldToCell(gameObject.transform.position);
-            //foreach (ContactPoint2D hit in collision.co)
-            //{
-            //Debug.Log(collision);
-            //pelletMap.SetTile(pelletMap.WorldToCell(playerCurrentPos), null);
-            //}
-            //DestroyImmediate(collision.gameObject);
+            
             //if (score > 2360)
             //{
                 // Game Over
             //}
 
+        }
+
+        if (collision.gameObject.tag == "PowerPellet")
+        {
+            Destroy(collision.gameObject);
+            score += 100;
         }
 
         if (collision.gameObject.tag == "Teleporter")
