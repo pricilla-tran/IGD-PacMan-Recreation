@@ -52,8 +52,8 @@ public class PacStudentController : MonoBehaviour
             StartCoroutine(CharacterRotate(45.0f));
             //StartCoroutine(CharacterMove(movement));
             lastInput = "left";
-            //CharacterPosition();
-            StartCoroutine(CharacterMove(movement));
+            CharacterPosition();
+            //StartCoroutine(CharacterMove(movement));
 
         }
         // Right
@@ -86,16 +86,17 @@ public class PacStudentController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Pellet")
+        if (collision.gameObject.tag == "Pellet")
         {
             score = score + 10;
-            //Destroy(collision.gameObject);
-            playerCurrentPos = pelletMap.WorldToCell(collision.transform.position);
+            Destroy(collision.gameObject);
+            //playerCurrentPos = pelletMap.WorldToCell(gameObject.transform.position);
             //foreach (ContactPoint2D hit in collision.co)
             //{
-                //Debug.Log(collision);
-                pelletMap.SetTile(pelletMap.WorldToCell(playerCurrentPos), null);
+            //Debug.Log(collision);
+            //pelletMap.SetTile(pelletMap.WorldToCell(playerCurrentPos), null);
             //}
+            //DestroyImmediate(collision.gameObject);
         }
 
         if (collision.tag == "Teleporter")
@@ -104,7 +105,7 @@ public class PacStudentController : MonoBehaviour
             {
                 gameObject.transform.position = new Vector3 (13.5f, gameObject.transform.position.y, 0);
             }
-            else if (gameObject.transform.position.x < -13.5 && currentInput == "right")
+            else if (gameObject.transform.position.x > -13.5 && currentInput == "right")
             {
                 gameObject.transform.position = new Vector3(-13.5f, gameObject.transform.position.y, 0);
             }
@@ -193,10 +194,10 @@ public class PacStudentController : MonoBehaviour
 
         if (currentInput == "up")
         {
-            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1.1f, LayerMask.GetMask("Wall"));
-            if (hit.rigidbody == null)
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
+            if (hit.collider == null)
             {
-                CreateTween(gameObject.transform.position + movement, walkSpeed);
+                CreateTween(gameObject.transform.position + Vector3.up, walkSpeed);
                 yield return new WaitForSeconds(walkSpeed);
                 //WalkingAudio();
                 
@@ -209,10 +210,10 @@ public class PacStudentController : MonoBehaviour
         }
         else if (currentInput == "down")
         {
-            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1.1f, LayerMask.GetMask("Wall"));
-            if (hit.rigidbody == null)
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
+            if (hit.collider == null)
             {
-                CreateTween(gameObject.transform.position + movement, walkSpeed);
+                CreateTween(gameObject.transform.position + Vector3.down, walkSpeed);
                 yield return new WaitForSeconds(walkSpeed);
                 //WalkingAudio();
                 
@@ -227,11 +228,11 @@ public class PacStudentController : MonoBehaviour
         }
         else if (currentInput == "left")
         {
-            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1.1f, LayerMask.GetMask("Wall"));
-            //Debug.DrawRay(gameObject.transform.position, Vector2.left);
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1.0f, LayerMask.GetMask("Wall"));
+            //Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.yellow);
             if (hit.collider == null)
             {
-                CreateTween(gameObject.transform.position + movement, walkSpeed);
+                CreateTween(gameObject.transform.position + Vector3.left, walkSpeed);
                 yield return new WaitForSeconds(walkSpeed);
                 //WalkingAudio();
 
@@ -244,10 +245,10 @@ public class PacStudentController : MonoBehaviour
         }
         else if (currentInput == "right")
         {
-            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1.1f, LayerMask.GetMask("Wall"));
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1.0f, LayerMask.GetMask("Wall"));
             if (hit.collider == null)
             {
-                CreateTween(gameObject.transform.position + movement, walkSpeed);
+                CreateTween(gameObject.transform.position + Vector3.right, walkSpeed);
                 yield return new WaitForSeconds(walkSpeed);
                 //WalkingAudio();
                 
@@ -321,10 +322,10 @@ public class PacStudentController : MonoBehaviour
 
     public void CreateTween(Vector3 endPosition, float duration)
     {
-        if (endPosition.x > -13.5f && endPosition.x < 13.5f && endPosition.y > -14.5f && endPosition.y < 14.5f)
-        {
+        //if (endPosition.x > -13.5f && endPosition.x < 13.5f && endPosition.y > -14.5f && endPosition.y < 14.5f)
+        //{
             bool addedTween = tweener.AddTween(gameObject.transform, gameObject.transform.position, endPosition, duration);
-        }
+        //}
     }
 
 }
