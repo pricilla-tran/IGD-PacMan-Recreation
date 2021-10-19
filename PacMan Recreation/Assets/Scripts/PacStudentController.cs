@@ -21,7 +21,7 @@ public class PacStudentController : MonoBehaviour
     public ParticleSystem dust;
     private Rigidbody2D playerRB;
     public AudioSource wallHitSound;
-    private float score;
+    public int score;
     private Vector3Int playerCurrentPos;
     public Tilemap pelletMap;
     //public Tile empty;
@@ -35,6 +35,7 @@ public class PacStudentController : MonoBehaviour
         Invoke("PlayBG", 1.5f);
         gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -45);
         playerRB = gameObject.GetComponent<Rigidbody2D>();
+        score = 0; 
     }
 
     // Update is called once per frame
@@ -88,8 +89,9 @@ public class PacStudentController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Pellet")
         {
-            score = score + 10;
+            
             Destroy(collision.gameObject);
+            score += 10;
             //playerCurrentPos = pelletMap.WorldToCell(gameObject.transform.position);
             //foreach (ContactPoint2D hit in collision.co)
             //{
@@ -97,9 +99,14 @@ public class PacStudentController : MonoBehaviour
             //pelletMap.SetTile(pelletMap.WorldToCell(playerCurrentPos), null);
             //}
             //DestroyImmediate(collision.gameObject);
+            if (score > 2360)
+            {
+                // Game Over
+            }
+
         }
 
-        if (collision.tag == "Teleporter")
+        else if (collision.tag == "Teleporter")
         {
             if (gameObject.transform.position.x < -13.5 && currentInput == "left")
             {

@@ -14,6 +14,8 @@ public class TimerManager : MonoBehaviour
     private float timer;
     public int countdownTime;
     public Text countdownText;
+    public Text gameoverText;
+    public PacStudentController characterController;
 
     void Awake()
     {
@@ -24,8 +26,12 @@ public class TimerManager : MonoBehaviour
     void Start()
     {
         timerText.text = "00:00:00";
+        gameoverText.text = "Game Over!";
+        gameoverText.enabled = false; 
         timerActive = false;
         //StartTimer();
+        characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<PacStudentController>();
+        characterController.enabled = false;
         StartCoroutine(Countdown());
     }
 
@@ -69,10 +75,17 @@ public class TimerManager : MonoBehaviour
 
         countdownText.text = "GO!";
         StartTimer();
+        characterController.enabled = true;
+        gameoverText.enabled = true;
 
         yield return new WaitForSeconds(1.0f);
 
         countdownText.gameObject.SetActive(false);
+
+    }
+
+    void GameOver()
+    {
 
     }
 
