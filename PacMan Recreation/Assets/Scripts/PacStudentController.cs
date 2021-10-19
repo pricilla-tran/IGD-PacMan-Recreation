@@ -24,10 +24,11 @@ public class PacStudentController : MonoBehaviour
     public int score;
     private Vector3Int playerCurrentPos;
     public Tilemap pelletMap;
-    private bool pelletHit = false; 
+    //private bool pelletHit = false; 
     private Vector3 TeleportPos1;
     private Vector3 TeleportPos2;
     private bool teleported = false;
+    private TimerManager timeManager;
     //public Tile empty;
 
     // Start is called before the first frame update
@@ -42,6 +43,7 @@ public class PacStudentController : MonoBehaviour
         score = 0;
         TeleportPos1 = new Vector3(13.5f, 0.5f, 0);
         TeleportPos2 = new Vector3(-13.5f, 0.5f, 0);
+        timeManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<TimerManager>();
     }
 
     // Update is called once per frame
@@ -118,10 +120,11 @@ public class PacStudentController : MonoBehaviour
             }
             */
             
-            //if (score > 2360)
-            //{
+            if (score > 2360)
+            {
                 // Game Over
-            //}
+                timeManager.GameOver();
+            }
 
         }
 
@@ -148,7 +151,16 @@ public class PacStudentController : MonoBehaviour
         }
         
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ghost")
+        {
+            timeManager.GameOver();
+            //Destroy(gameObject);
+        }
+    }
+
     private void Teleport()
     {
         if (teleported == true && gameObject.transform.position.x <= -14.5f)

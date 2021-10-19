@@ -84,9 +84,10 @@ public class TimerManager : MonoBehaviour
 
     }
 
-    void GameOver()
+    public void GameOver()
     {
-
+        gameoverText.enabled = true;
+        characterController.enabled = false;
     }
 
 
