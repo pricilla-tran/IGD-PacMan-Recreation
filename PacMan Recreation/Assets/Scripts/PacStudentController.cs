@@ -92,6 +92,8 @@ public class PacStudentController : MonoBehaviour
         {
             
             Destroy(collision.gameObject);
+            score += 10;
+            /*
             if (score == 0)
             {
                 score = 10;
@@ -106,6 +108,7 @@ public class PacStudentController : MonoBehaviour
             {
                 score += 10;
             }
+            */
             //playerCurrentPos = pelletMap.WorldToCell(gameObject.transform.position);
             //foreach (ContactPoint2D hit in collision.co)
             //{
@@ -120,13 +123,15 @@ public class PacStudentController : MonoBehaviour
 
         }
 
-        else if (collision.tag == "Teleporter")
+        if (collision.gameObject.tag == "Teleporter")
         {
-            if (gameObject.transform.position.x < -13.5 && currentInput == "left")
+            Debug.Log("Hit " + collision + ", Teleport Me Baby!");
+            if (gameObject.transform.position.x <= -14.5f && currentInput == "left")
             {
                 gameObject.transform.position = new Vector3 (13.5f, gameObject.transform.position.y, 0);
+                Debug.Log("Teleport Me!");
             }
-            else if (gameObject.transform.position.x > -13.5 && currentInput == "right")
+            else if (gameObject.transform.position.x >= 14.5f && currentInput == "right")
             {
                 gameObject.transform.position = new Vector3(-13.5f, gameObject.transform.position.y, 0);
             }

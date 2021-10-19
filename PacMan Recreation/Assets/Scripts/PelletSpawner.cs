@@ -50,6 +50,19 @@ public class PelletSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        // This is for Case 6 Power Pellet 
+        for (int m = 0; m < levelMap.GetLength(0); m++)
+        {
+            for (int n = 0; n < levelMap.GetLength(1); n++)
+            {
+                if (levelMap[m, n] == 6)
+                {
+                    Instantiate(levelElements[1], new Vector3(-13.5f + n, 14.5f - m, 0), Quaternion.identity);
+                }
+            }
+        }
+
         for (int i = 0; i < levelMap.GetLength(0); i++)
         {
             for (int j = 0; j < levelMap.GetLength(1); j++)
