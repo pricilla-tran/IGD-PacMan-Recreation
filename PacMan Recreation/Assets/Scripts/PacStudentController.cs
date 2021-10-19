@@ -25,6 +25,9 @@ public class PacStudentController : MonoBehaviour
     private Vector3Int playerCurrentPos;
     public Tilemap pelletMap;
     private bool pelletHit = false; 
+    private Vector3 TeleportPos1;
+    private Vector3 TeleportPos2;
+    private bool teleported = false;
     //public Tile empty;
 
     // Start is called before the first frame update
@@ -36,7 +39,9 @@ public class PacStudentController : MonoBehaviour
         Invoke("PlayBG", 1.5f);
         gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -45);
         playerRB = gameObject.GetComponent<Rigidbody2D>();
-        score = 0; 
+        score = 0;
+        TeleportPos1 = new Vector3(13.5f, 0.5f, 0);
+        TeleportPos2 = new Vector3(-13.5f, 0.5f, 0);
     }
 
     // Update is called once per frame
@@ -47,6 +52,7 @@ public class PacStudentController : MonoBehaviour
         //CharacterRotation();
         WalkingAnimation();
         WalkingAudio();
+        Teleport();
 
         // Left
         if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") == -1)
@@ -83,6 +89,8 @@ public class PacStudentController : MonoBehaviour
             CharacterPosition();
             //StartCoroutine(CharacterMove(movement));
         }
+
+
 
     }
 
@@ -126,38 +134,34 @@ public class PacStudentController : MonoBehaviour
         if (collision.gameObject.tag == "Teleporter")
         {
             Debug.Log("Hit " + collision + ", Teleport Me Baby!");
-            if (gameObject.transform.position.x <= -14.5f && currentInput == "left")
-            {
-                gameObject.transform.position = new Vector3 (13.5f, gameObject.transform.position.y, 0);
+            //if (gameObject.transform.position.x <= -14.5f && currentInput == "left")
+            //{
+                //gameObject.transform.position = TeleportPos1;
                 Debug.Log("Teleport Me!");
-            }
-            else if (gameObject.transform.position.x >= 14.5f && currentInput == "right")
-            {
-                gameObject.transform.position = new Vector3(-13.5f, gameObject.transform.position.y, 0);
-            }
+            teleported = true;
+                
+            //}
+            //else if (gameObject.transform.position.x >= 14.5f && currentInput == "right")
+            //{
+               // gameObject.transform.position = new Vector3(-13.5f, gameObject.transform.position.y, 0);
+            //}
         }
         
     }
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    private void Teleport()
     {
-        if (collision.gameObject.CompareTag("Pellet"))
+        if (teleported == true && gameObject.transform.position.x <= -14.5f)
         {
-            score = score + 10;
-            //Destroy(collision.gameObject);
-            Vector3 hitPosition = Vector3.zero;
-            playerCurrentPos = pelletMap.WorldToCell(collision.gameObject.transform.position);
-            foreach (ContactPoint2D hit in collision.contacts)
-            {
-                //Debug.Log(collision);
-                hitPosition.x = hit.point.x - 0.01f;
-                hitPosition.y = hit.point.y - 0.01f;
-                pelletMap.SetTile(pelletMap.WorldToCell(hitPosition), null);
-            }
+            gameObject.transform.position = TeleportPos1;
+            teleported = false;
+        }
+        else if (teleported == true && gameObject.transform.position.x >= 14.5f)
+        {
+            gameObject.transform.position = TeleportPos2;
+            teleported = false;
         }
     }
-    */
-    //TilemapCollider2D.OnTriggerEnter
 
     public void SaveScore()
     {
