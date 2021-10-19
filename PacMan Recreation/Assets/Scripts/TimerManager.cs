@@ -76,7 +76,7 @@ public class TimerManager : MonoBehaviour
         countdownText.text = "GO!";
         StartTimer();
         characterController.enabled = true;
-        gameoverText.enabled = true;
+        //gameoverText.enabled = true;
 
         yield return new WaitForSeconds(1.0f);
 

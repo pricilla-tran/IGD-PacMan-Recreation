@@ -24,6 +24,7 @@ public class PacStudentController : MonoBehaviour
     public int score;
     private Vector3Int playerCurrentPos;
     public Tilemap pelletMap;
+    private bool pelletHit = false; 
     //public Tile empty;
 
     // Start is called before the first frame update
@@ -91,7 +92,20 @@ public class PacStudentController : MonoBehaviour
         {
             
             Destroy(collision.gameObject);
-            score += 10;
+            if (score == 0)
+            {
+                score = 10;
+                pelletHit = true;
+            }
+            else if (score == 10 && pelletHit)
+            {
+                score = 10;
+                pelletHit = false;
+            }
+            else
+            {
+                score += 10;
+            }
             //playerCurrentPos = pelletMap.WorldToCell(gameObject.transform.position);
             //foreach (ContactPoint2D hit in collision.co)
             //{
@@ -99,10 +113,10 @@ public class PacStudentController : MonoBehaviour
             //pelletMap.SetTile(pelletMap.WorldToCell(playerCurrentPos), null);
             //}
             //DestroyImmediate(collision.gameObject);
-            if (score > 2360)
-            {
+            //if (score > 2360)
+            //{
                 // Game Over
-            }
+            //}
 
         }
 
