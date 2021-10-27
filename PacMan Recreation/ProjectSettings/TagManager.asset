@@ -10,6 +10,7 @@ TagManager:
   - PowerPellet
   - Manager
   - Ghost
+  - GhostManager
   layers:
   - Default
   - TransparentFX

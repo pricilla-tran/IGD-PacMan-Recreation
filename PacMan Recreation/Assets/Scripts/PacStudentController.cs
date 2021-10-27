@@ -29,7 +29,7 @@ public class PacStudentController : MonoBehaviour
     private Vector3 TeleportPos2;
     private bool teleported = false;
     private TimerManager timeManager;
-    //public Tile empty;
+    private GhostController ghostController;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +44,7 @@ public class PacStudentController : MonoBehaviour
         TeleportPos1 = new Vector3(13.5f, 0.5f, 0);
         TeleportPos2 = new Vector3(-13.5f, 0.5f, 0);
         timeManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<TimerManager>();
+        ghostController = GameObject.FindGameObjectWithTag("GhostManager").GetComponent<GhostController>();
     }
 
     // Update is called once per frame
@@ -131,6 +132,8 @@ public class PacStudentController : MonoBehaviour
         if (collision.gameObject.tag == "PowerPellet")
         {
             Destroy(collision.gameObject);
+            ghostController.ScaredState();
+            //Invoke(ghostController.ScaredState, 1)
             score += 100;
         }
 
@@ -158,6 +161,8 @@ public class PacStudentController : MonoBehaviour
         {
             timeManager.GameOver();
             //Destroy(gameObject);
+            walkingSound.Stop();
+            pacStudentAnimator.SetTrigger("DeathParam");
         }
     }
 
