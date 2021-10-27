@@ -12,7 +12,10 @@ public class GhostController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Ghost1Animator.ResetTrigger("Down");
+        Ghost1Animator.SetTrigger("Up");
+        Ghost1Animator.ResetTrigger("Left");
+        Ghost1Animator.ResetTrigger("Right");
     }
 
     // Update is called once per frame
@@ -23,6 +26,10 @@ public class GhostController : MonoBehaviour
 
     public void ScaredState()
     {
+        Ghost1Animator.ResetTrigger("Down");
+        Ghost1Animator.ResetTrigger("Up");
+        Ghost1Animator.ResetTrigger("Left");
+        Ghost1Animator.ResetTrigger("Right");
         Ghost1Animator.SetTrigger("Scared");
         //Ghost2Animator.SetTrigger("Scared");
         //Ghost3Animator.SetTrigger("Scared");
