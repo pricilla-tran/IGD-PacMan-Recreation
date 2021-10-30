@@ -19,7 +19,8 @@ public class GhostController : MonoBehaviour
     private Vector3[] ghost4Pos;
     public float moveSpeed = 2;
     private int cycleCount = 0;
-    private Vector3 dirVector;
+    private Vector3 dirG3Vector;
+    private Vector3 dirG4Vector;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class GhostController : MonoBehaviour
         ghost4Pos[2] = new Vector3(4.5f, -0.5f, 0);
         ghost4Pos[3] = new Vector3(7.5f, -0.5f, 0);
 
+        dirG4Vector = Vector3.up;
 
         Ghost1Animator = Ghost1.GetComponent<Animator>();
         Ghost2Animator = Ghost2.GetComponent<Animator>();
@@ -54,7 +56,7 @@ public class GhostController : MonoBehaviour
     void Update()
     {
         Ghost3Move();
-        
+        Ghost4Move();
     }
 
     public void ScaredState()
@@ -93,22 +95,22 @@ public class GhostController : MonoBehaviour
         RaycastHit2D down = Physics2D.Raycast(Ghost3.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
         RaycastHit2D up = Physics2D.Raycast(Ghost3.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
 
-        if (up.collider == null && dirVector == Vector3.up)
+        if (up.collider == null && dirG3Vector == Vector3.up)
         {
-            CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+            CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
         }
-        else if (right.collider == null && dirVector == Vector3.right)
+        else if (right.collider == null && dirG3Vector == Vector3.right)
         {
-            CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+            CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
         }
-        else if (left.collider == null && dirVector == Vector3.left)
+        else if (left.collider == null && dirG3Vector == Vector3.left)
         {
-            CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+            CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
         }
-        else if (down.collider == null && dirVector == Vector3.down)
+        else if (down.collider == null && dirG3Vector == Vector3.down)
         {
             //CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
-            CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+            CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
             Debug.Log("Can't moveeee");
         }
         else
@@ -132,19 +134,19 @@ public class GhostController : MonoBehaviour
         {
             case 0:
                 // Up
-                dirVector = Vector3.up;
+                dirG3Vector = Vector3.up;
                 break;
             case 1:
                 // Down 
-                dirVector = Vector3.down;
+                dirG3Vector = Vector3.down;
                 break;
             case 2:
                 // Left
-                dirVector = Vector3.left;
+                dirG3Vector = Vector3.left;
                 break;
             case 3:
                 // Right
-                dirVector = Vector3.right;
+                dirG3Vector = Vector3.right;
                 break;
             default:
                 break;
@@ -160,33 +162,61 @@ public class GhostController : MonoBehaviour
     {
         // Move clockwise around the map, following the outside wall
         //CreateGhostTween(new Vector3(10.5f, -0.5f, 0), 1f);
-        /*
-        RaycastHit2D right = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1.0f);
-        RaycastHit2D left = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1.0f);
-        RaycastHit2D down = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1.0f);
-        RaycastHit2D up = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1.0f);
+        dirG4Vector = Vector3.up;
 
-        if (right.collider.tag == "Walls")
+        RaycastHit2D right = Physics2D.Raycast(Ghost4.transform.position, Vector2.right, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D left = Physics2D.Raycast(Ghost4.transform.position, Vector2.left, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D down = Physics2D.Raycast(Ghost4.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D up = Physics2D.Raycast(Ghost4.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
+
+        if (up.collider == null && dirG4Vector == Vector3.up)
         {
-
+            CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
         }
-        else if (left.collider.tag == "Walls")
+        else if (right.collider == null && dirG4Vector == Vector3.right)
         {
-
+            CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
         }
-        else if (up.collider.tag == "Walls")
+        else if (left.collider == null && dirG4Vector == Vector3.left)
         {
-
+            CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
         }
-        else if (down.collider.tag == "Walls")
+        else if (down.collider == null && dirG4Vector == Vector3.down)
         {
-
+            //CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+            CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            Debug.Log("STOP");
         }
-        */
+        else
+        {
+            if (up.collider != null && right.collider != null)
+            {
+                dirG4Vector = Vector3.down;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+            else if (up.collider != null && left.collider != null)
+            {
+                dirG4Vector = Vector3.right;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+            else if (up.collider != null && right.collider == null)
+            {
+                dirG4Vector = Vector3.right;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+            else if (left.collider != null && right.collider != null)
+            {
+                dirG4Vector = Vector3.down;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+            
+        }
+
+
 
         //CreateGhostTween(new Vector3(0.5f, 3.5f, 0), 2f);
         //CreateGhostTween(ghost4Pos[1], 2f);
-        StartCoroutine(clockwiseWallMove());
+        //StartCoroutine(clockwiseWallMove());
 
     }
 
@@ -197,18 +227,18 @@ public class GhostController : MonoBehaviour
         {
             for (int i = 0; i < 4; i++)
             {
-                CreateGhostTween(ghost4Pos[i], 2f);
+                //CreateGhostTween(ghost4Pos[i], 2f);
             }
             yield return new WaitForSeconds(0.5f);
         }
 
     }
 
-    public void CreateGhostTween(Vector3 endPosition, float duration)
+    public void CreateGhostTween(GameObject target, Vector3 endPosition, float duration)
     {
         //if (endPosition.x > -13.5f && endPosition.x < 13.5f && endPosition.y > -14.5f && endPosition.y < 14.5f)
         //{
-        bool addedTween = ghost3Tweener.AddTween(Ghost3.transform, Ghost3.transform.position, endPosition, duration);
+        bool addedTween = ghost3Tweener.AddTween(target.transform, target.transform.position, endPosition, duration);
         //}
     }
 
