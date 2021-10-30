@@ -88,15 +88,36 @@ public class GhostController : MonoBehaviour
     {
         // Move randomly at grid position
         
-        RaycastHit2D right = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1.0f);
-        RaycastHit2D left = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1.0f);
-        RaycastHit2D down = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1.0f);
-        RaycastHit2D up = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1.0f);
-        
-        //if (right.collider == null || left.collider == null)
-        //{
+        RaycastHit2D right = Physics2D.Raycast(Ghost3.transform.position, Vector2.right, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D left = Physics2D.Raycast(Ghost3.transform.position, Vector2.left, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D down = Physics2D.Raycast(Ghost3.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D up = Physics2D.Raycast(Ghost3.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
+
+        if (up.collider == null && dirVector == Vector3.up)
+        {
             CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
-        //}
+        }
+        else if (right.collider == null && dirVector == Vector3.right)
+        {
+            CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+        }
+        else if (left.collider == null && dirVector == Vector3.left)
+        {
+            CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+        }
+        else if (down.collider == null && dirVector == Vector3.down)
+        {
+            //CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+            CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+            Debug.Log("Can't moveeee");
+        }
+        else
+        {
+            //if (up.collider != null)
+            //{
+                MoveDirection();
+            //}
+        }
         
 
         //if ()

@@ -5618,6 +5618,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8315451063640577707, guid: 29ecb6d50d8de6a418ffb4ce3951eebf, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315451063640577707, guid: 29ecb6d50d8de6a418ffb4ce3951eebf, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 590055273
+      objectReference: {fileID: 0}
     - target: {fileID: 8315451063640577709, guid: 29ecb6d50d8de6a418ffb4ce3951eebf, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 1
@@ -6497,6 +6505,14 @@ PrefabInstance:
     - target: {fileID: 646491035692771824, guid: 984239b04880e4244a8d06f152a5ef8f, type: 3}
       propertyPath: m_TagString
       value: Ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 646491035692771826, guid: 984239b04880e4244a8d06f152a5ef8f, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 646491035692771826, guid: 984239b04880e4244a8d06f152a5ef8f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 590055273
       objectReference: {fileID: 0}
     - target: {fileID: 646491035692771827, guid: 984239b04880e4244a8d06f152a5ef8f, type: 3}
       propertyPath: m_RootOrder
@@ -19698,6 +19714,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3009121042636215921, guid: afac1f722f8fcd141a3de9f27501096b, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009121042636215921, guid: afac1f722f8fcd141a3de9f27501096b, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 590055273
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009121042636215923, guid: afac1f722f8fcd141a3de9f27501096b, type: 3}
+      propertyPath: m_CullingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009121042636215923, guid: afac1f722f8fcd141a3de9f27501096b, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afac1f722f8fcd141a3de9f27501096b, type: 3}
 --- !u!1 &1357030704
@@ -20407,6 +20439,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 4544807883688512682, guid: a0e932142319c6b44aee29c7a3331f50, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544807883688512682, guid: a0e932142319c6b44aee29c7a3331f50, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 590055273
+      objectReference: {fileID: 0}
     - target: {fileID: 4544807883688512683, guid: a0e932142319c6b44aee29c7a3331f50, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -20590,7 +20630,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 1745446678}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
