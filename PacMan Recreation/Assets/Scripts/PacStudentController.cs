@@ -193,7 +193,9 @@ public class PacStudentController : MonoBehaviour
     void GetMovementInput()
     {
         timer += Time.deltaTime;
-        movement = new Vector3((int) Input.GetAxis("Horizontal"), (int)Input.GetAxis("Vertical"), 0);
+        movement = new Vector3((int) Input.GetAxis("Horizont" +
+            "" +
+            "al"), (int)Input.GetAxis("Vertical"), 0);
         movement = Vector3.ClampMagnitude(movement, 1.0f);
         movementSqrMagnitude = movement.sqrMagnitude;
         //Debug.Log(movement);
@@ -245,7 +247,7 @@ public class PacStudentController : MonoBehaviour
             if (hit.collider == null)
             {
                 CreateTween(gameObject.transform.position + Vector3.up, walkSpeed);
-                yield return new WaitForSeconds(walkSpeed);
+                yield return new WaitForSeconds(0.5f);
                 //WalkingAudio();
                 
             }
@@ -261,7 +263,7 @@ public class PacStudentController : MonoBehaviour
             if (hit.collider == null)
             {
                 CreateTween(gameObject.transform.position + Vector3.down, walkSpeed);
-                yield return new WaitForSeconds(walkSpeed);
+                yield return new WaitForSeconds(0.5f);
                 //WalkingAudio();
                 
             }
@@ -280,7 +282,7 @@ public class PacStudentController : MonoBehaviour
             if (hit.collider == null)
             {
                 CreateTween(gameObject.transform.position + Vector3.left, walkSpeed);
-                yield return new WaitForSeconds(walkSpeed);
+                yield return new WaitForSeconds(0.5f);
                 //WalkingAudio();
 
             }
@@ -296,7 +298,7 @@ public class PacStudentController : MonoBehaviour
             if (hit.collider == null)
             {
                 CreateTween(gameObject.transform.position + Vector3.right, walkSpeed);
-                yield return new WaitForSeconds(walkSpeed);
+                yield return new WaitForSeconds(0.5f);
                 //WalkingAudio();
                 
             }

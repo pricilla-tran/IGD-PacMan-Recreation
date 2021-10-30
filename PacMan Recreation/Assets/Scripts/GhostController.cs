@@ -16,10 +16,21 @@ public class GhostController : MonoBehaviour
     private Tweener ghost2Tweener;
     private Tweener ghost3Tweener;
     private Tweener ghost4Tweener;
+    private Vector3[] ghost4Pos;
+    public float moveSpeed = 2;
+    private int cycleCount = 0;
+    private Vector3 dirVector;
 
     // Start is called before the first frame update
     void Start()
     {
+        ghost4Pos = new Vector3[4];
+        ghost4Pos[0] = new Vector3(0.5f, 3.5f, 0);
+        ghost4Pos[1] = new Vector3(4.5f, 3.5f, 0);
+        ghost4Pos[2] = new Vector3(4.5f, -0.5f, 0);
+        ghost4Pos[3] = new Vector3(7.5f, -0.5f, 0);
+
+
         Ghost1Animator = Ghost1.GetComponent<Animator>();
         Ghost2Animator = Ghost2.GetComponent<Animator>();
         Ghost3Animator = Ghost3.GetComponent<Animator>();
@@ -34,12 +45,16 @@ public class GhostController : MonoBehaviour
         Ghost1Animator.SetTrigger("Up");
         Ghost1Animator.ResetTrigger("Left");
         Ghost1Animator.ResetTrigger("Right");
+
+        MoveDirection();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Ghost4Move();
+        Ghost3Move();
+        
     }
 
     public void ScaredState()
@@ -58,33 +73,121 @@ public class GhostController : MonoBehaviour
     public void Ghost1Move()
     {
         // Move in a random valid direction that is further than or equal to the distance from Pacstudent to the current grid position 
+        
     }
 
     public void Ghost2Move()
     {
         // Move to a random adjacent junction that is closer than or equal to PacStudent than the current grid position 
+
+
+
     }
 
     public void Ghost3Move()
     {
         // Move randomly at grid position
+        
+        RaycastHit2D right = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1.0f);
+        RaycastHit2D left = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1.0f);
+        RaycastHit2D down = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1.0f);
+        RaycastHit2D up = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1.0f);
+        
+        //if (right.collider == null || left.collider == null)
+        //{
+            CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+        //}
+        
+
+        //if ()
+        //CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
+
+    }
+
+    private void MoveDirection()
+    {
+        int direction = Random.Range(0, 4);
+        switch(direction)
+        {
+            case 0:
+                // Up
+                dirVector = Vector3.up;
+                break;
+            case 1:
+                // Down 
+                dirVector = Vector3.down;
+                break;
+            case 2:
+                // Left
+                dirVector = Vector3.left;
+                break;
+            case 3:
+                // Right
+                dirVector = Vector3.right;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.collider.name);
     }
 
     public void Ghost4Move()
     {
         // Move clockwise around the map, following the outside wall
-        RaycastHit2D forward = Physics2D.Raycast(Ghost4.transform.position, Vector2.up, 1.0f);
-        if (forward.collider.tag == "Walls")
+        //CreateGhostTween(new Vector3(10.5f, -0.5f, 0), 1f);
+        /*
+        RaycastHit2D right = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1.0f);
+        RaycastHit2D left = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1.0f);
+        RaycastHit2D down = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1.0f);
+        RaycastHit2D up = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1.0f);
+
+        if (right.collider.tag == "Walls")
         {
-            Debug.Log("Wallllllll");
+
         }
+        else if (left.collider.tag == "Walls")
+        {
+
+        }
+        else if (up.collider.tag == "Walls")
+        {
+
+        }
+        else if (down.collider.tag == "Walls")
+        {
+
+        }
+        */
+
+        //CreateGhostTween(new Vector3(0.5f, 3.5f, 0), 2f);
+        //CreateGhostTween(ghost4Pos[1], 2f);
+        StartCoroutine(clockwiseWallMove());
+
+    }
+
+    private IEnumerator clockwiseWallMove()
+    {
+        //return null;
+        while (cycleCount == 0)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                CreateGhostTween(ghost4Pos[i], 2f);
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+
     }
 
     public void CreateGhostTween(Vector3 endPosition, float duration)
     {
         //if (endPosition.x > -13.5f && endPosition.x < 13.5f && endPosition.y > -14.5f && endPosition.y < 14.5f)
         //{
-        bool addedTween = ghost1Tweener.AddTween(gameObject.transform, gameObject.transform.position, endPosition, duration);
+        bool addedTween = ghost3Tweener.AddTween(Ghost3.transform, Ghost3.transform.position, endPosition, duration);
         //}
     }
 
