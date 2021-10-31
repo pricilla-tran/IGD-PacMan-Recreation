@@ -162,7 +162,8 @@ public class GhostController : MonoBehaviour
     {
         // Move clockwise around the map, following the outside wall
         //CreateGhostTween(new Vector3(10.5f, -0.5f, 0), 1f);
-        dirG4Vector = Vector3.up;
+        //dirG4Vector = Vector3.up;
+
 
         RaycastHit2D right = Physics2D.Raycast(Ghost4.transform.position, Vector2.right, 1.0f, LayerMask.GetMask("Wall"));
         RaycastHit2D left = Physics2D.Raycast(Ghost4.transform.position, Vector2.left, 1.0f, LayerMask.GetMask("Wall"));
@@ -174,42 +175,105 @@ public class GhostController : MonoBehaviour
             CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
         }
         else if (right.collider == null && dirG4Vector == Vector3.right)
-        {
+        {   
             CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            Debug.Log("Going Right!");
+
+            if (up.collider == null && left.collider == null)
+            {
+                dirG4Vector = Vector3.up;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+
         }
         else if (left.collider == null && dirG4Vector == Vector3.left)
         {
             CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+
+            if (down.collider == null && left.collider == null && Ghost4.transform.position.x < 0.5)
+            {
+                dirG4Vector = Vector3.down;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+
+
         }
         else if (down.collider == null && dirG4Vector == Vector3.down)
         {
             //CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
             CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
-            Debug.Log("STOP");
+            Debug.Log("Going Down");
+
+            if (left.collider != null && right.collider == null && down.collider == null && Ghost4.transform.position.y < -0.5)
+            {
+                dirG4Vector = Vector3.right;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+            
         }
         else
         {
-            if (up.collider != null && right.collider != null)
+
+            if (left.collider != null && down.collider != null && Ghost4.transform.position.y < -0.5)
+            {
+                dirG4Vector = Vector3.up;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+            
+            else if (up.collider != null && left.collider == null && Ghost4.transform.position.y < -8.5)
+            {
+                dirG4Vector = Vector3.left;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+            
+            else if (up.collider != null && right.collider == null)
+            {
+                dirG4Vector = Vector3.right;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
+            else if (up.collider != null && right.collider != null)
             {
                 dirG4Vector = Vector3.down;
                 CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+                //Debug.Log("Going down!");
             }
             else if (up.collider != null && left.collider != null)
             {
                 dirG4Vector = Vector3.right;
                 CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
             }
-            else if (up.collider != null && right.collider == null)
+            else if (down.collider != null && right.collider == null)
             {
                 dirG4Vector = Vector3.right;
                 CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
             }
-            else if (left.collider != null && right.collider != null)
+            
+            else if (down.collider != null && right.collider != null)
+            {
+                if (dirG4Vector == Vector3.right)
+                {
+                    dirG4Vector = Vector3.up;
+                    CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+                }
+                else if (dirG4Vector == Vector3.down)
+                {
+                    dirG4Vector = Vector3.left;
+                    CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+                }
+            }
+
+            else if (left.collider != null && down.collider == null && dirG4Vector == Vector3.left)
             {
                 dirG4Vector = Vector3.down;
                 CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
             }
+            else if (right.collider != null && dirG4Vector == Vector3.right)
+            {
+                dirG4Vector = Vector3.up;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
+            }
             
+
         }
 
 
