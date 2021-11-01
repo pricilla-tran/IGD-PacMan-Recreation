@@ -31,6 +31,7 @@ public class GhostController : MonoBehaviour
         ghost4Pos[2] = new Vector3(4.5f, -0.5f, 0);
         ghost4Pos[3] = new Vector3(7.5f, -0.5f, 0);
 
+        dirG3Vector = Vector3.up;
         dirG4Vector = Vector3.up;
 
         Ghost1Animator = Ghost1.GetComponent<Animator>();
@@ -48,7 +49,7 @@ public class GhostController : MonoBehaviour
         Ghost1Animator.ResetTrigger("Left");
         Ghost1Animator.ResetTrigger("Right");
 
-        MoveDirection();
+        //MoveDirection();
 
     }
 
@@ -99,26 +100,97 @@ public class GhostController : MonoBehaviour
         {
             CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
         }
-        else if (right.collider == null && dirG3Vector == Vector3.right)
-        {
-            CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
-        }
-        else if (left.collider == null && dirG3Vector == Vector3.left)
-        {
-            CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
-        }
         else if (down.collider == null && dirG3Vector == Vector3.down)
         {
             //CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
             CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+            /*
+            if (right.collider != null && down.collider != null || left.collider != null && down.collider != null)
+            {
+                MoveDirection(2, 4);
+                CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+            }
+            */
             Debug.Log("Can't moveeee");
         }
+        else if (right.collider == null && dirG3Vector == Vector3.right)
+        {
+            CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+
+            if (up.collider != null && right.collider != null || down.collider != null && right.collider != null)
+            {
+                MoveDirection(0, 2);
+                CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+            }
+            
+
+        }
+        else if (left.collider == null && dirG3Vector == Vector3.left)
+        {
+            CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+            /*
+            if (up.collider != null && left.collider != null || down.collider != null && left.collider != null)
+            {
+                MoveDirection(0, 2);
+                CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+            }
+            */
+
+            if (up.collider != null && left.collider != null && dirG3Vector != Vector3.left || down.collider != null && left.collider != null && dirG3Vector != Vector3.down)
+            {
+                MoveDirection(0, 2);
+                CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+            }
+            
+
+        }
+        
         else
         {
-            //if (up.collider != null)
-            //{
-                MoveDirection();
-            //}
+            if (up.collider != null)
+            {
+                MoveDirection(2,4);
+                
+                if (right.collider != null || left.collider != null)
+                {
+                    MoveDirection(0, 2);
+                }
+
+            }
+            else if (down.collider != null)
+            {
+                if (right.collider != null && dirG3Vector != Vector3.left && dirG3Vector != Vector3.right)
+                {
+                    MoveDirection(2, 4);
+                }
+                else if (left.collider != null && dirG3Vector != Vector3.left && dirG3Vector != Vector3.right)
+                {
+                    MoveDirection(2, 4);
+                }
+                else
+                {
+                    MoveDirection(0, 2);
+                }
+                
+
+            }
+            else if (right.collider != null)
+            {
+                MoveDirection(0, 2);
+
+                if (up.collider != null || down.collider != null)
+                {
+                    MoveDirection(0, 2);
+                }
+
+            }
+            else if (left.collider != null)
+            {
+                MoveDirection(0, 2);
+                Debug.Log("left if");
+            }
+            
+
         }
         
 
@@ -127,9 +199,9 @@ public class GhostController : MonoBehaviour
 
     }
 
-    private void MoveDirection()
+    private void MoveDirection(int min, int max)
     {
-        int direction = Random.Range(0, 4);
+        int direction = Random.Range(min, max);
         switch(direction)
         {
             case 0:
