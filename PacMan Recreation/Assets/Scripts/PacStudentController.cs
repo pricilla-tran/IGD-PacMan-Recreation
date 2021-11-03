@@ -30,10 +30,12 @@ public class PacStudentController : MonoBehaviour
     private bool teleported = false;
     private TimerManager timeManager;
     private GhostController ghostController;
+    //public GameObject[] lifeIndicator; 
 
     // Start is called before the first frame update
     void Start()
     {
+        //lifeIndicator = new GameObject[3];
         IntroBGMusic.Play();
         playerInitialPos = new Vector3(-12.5f, 13.5f, 0);
         tweener = gameObject.GetComponent<Tweener>();
@@ -165,6 +167,7 @@ public class PacStudentController : MonoBehaviour
             //Destroy(gameObject);
             walkingSound.Stop();
             pacStudentAnimator.SetTrigger("DeathParam");
+            //Destroy(lifeIndicator[0]);
         }
     }
 

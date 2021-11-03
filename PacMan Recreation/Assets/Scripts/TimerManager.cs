@@ -21,6 +21,7 @@ public class TimerManager : MonoBehaviour
     public Text ghostTimerText;
     private float ghostTimer = 10;
     private TimeSpan ghostTimePlaying;
+    public GameObject[] lifeIndicator;
 
     void Awake()
     {
@@ -133,6 +134,7 @@ public class TimerManager : MonoBehaviour
         gameoverText.enabled = true;
         characterController.enabled = false;
         ghostController.enabled = false;
+        Destroy(lifeIndicator[0]);
     }
 
 

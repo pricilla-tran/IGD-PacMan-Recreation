@@ -114,13 +114,21 @@ public class GhostController : MonoBehaviour
     public void Ghost1Move()
     {
         // Move in a random valid direction that is further than or equal to the distance from Pacstudent to the current grid position 
-        
+
+        RaycastHit2D right = Physics2D.Raycast(Ghost1.transform.position, Vector2.right, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D left = Physics2D.Raycast(Ghost1.transform.position, Vector2.left, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D down = Physics2D.Raycast(Ghost1.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D up = Physics2D.Raycast(Ghost1.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
     }
 
     public void Ghost2Move()
     {
         // Move to a random adjacent junction that is closer than or equal to PacStudent than the current grid position 
 
+        RaycastHit2D right = Physics2D.Raycast(Ghost2.transform.position, Vector2.right, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D left = Physics2D.Raycast(Ghost2.transform.position, Vector2.left, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D down = Physics2D.Raycast(Ghost2.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D up = Physics2D.Raycast(Ghost2.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
 
 
     }
@@ -137,12 +145,19 @@ public class GhostController : MonoBehaviour
         if (up.collider == null && dirG3Vector == Vector3.up)
         {
             CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+            if (left.collider == null && right.collider == null && Ghost3.transform.position.y > 4.5)
+            {
+                MoveDirection(2, 4);
+                //dirG3Vector = Vector3.up;
+                //CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+
+            }
         }
         else if (down.collider == null && dirG3Vector == Vector3.down)
         {
             //CreateGhostTween(Ghost3.transform.position + dirVector, 1.75f);
             CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
-            
+            Debug.Log("Correct");
         }
         else if (right.collider == null && dirG3Vector == Vector3.right)
         {
@@ -150,18 +165,32 @@ public class GhostController : MonoBehaviour
             if (up.collider == null && left.collider == null && Ghost3.transform.position.x > 0.5)
             {
                 dirG3Vector = Vector3.up;
-                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG3Vector, 1.75f);
+                CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
                 
+            }
+            else if (down.collider == null && left.collider == null && Ghost3.transform.position.y > 12.5)
+            {
+                dirG3Vector = Vector3.down;
+                CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+
             }
         }
         else if (left.collider == null && dirG3Vector == Vector3.left)
         {
             CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
 
-            if (up.collider == null && right.collider == null && Ghost3.transform.position.x < -0.5 && Ghost3.transform.position.y > 0.5)
+            if (up.collider == null && Ghost3.transform.position.x < -0.5 && Ghost3.transform.position.y > 0.5)
             {
-                dirG3Vector = Vector3.up;
-                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG3Vector, 1.75f);
+                MoveDirection(0,3);
+                if (dirG3Vector == Vector3.up || dirG3Vector == Vector3.left)
+                {
+                    CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+                }
+            }
+            else if (down.collider == null && dirG3Vector != Vector3.up && Ghost3.transform.position.y > 12.5)
+            {
+                dirG3Vector = Vector3.down;
+                CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
             }
 
         }
@@ -171,42 +200,105 @@ public class GhostController : MonoBehaviour
             if (up.collider != null && Ghost3.transform.position.y > 7.5)
             {
                 MoveDirection(2, 4);
-                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG3Vector, 1.75f);
+                //CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
 
                 if (right.collider != null)
                 {
-                    MoveDirection(1, 1);
+                    if (dirG3Vector == Vector3.up)
+                    {
+                        MoveDirection(2, 2);
+                        
+                    }
+                    else if (dirG3Vector == Vector3.left)
+                    {
+                        MoveDirection(1, 1);
+                    }
+                    else
+                    {
+                        MoveDirection(2, 2);
+                    }
+                }
+                else if (left.collider != null)
+                {
+                    if (dirG3Vector == Vector3.up)
+                    {
+                        MoveDirection(3, 3);
+                    }
+                    else if (dirG3Vector == Vector3.right)
+                    {
+                        MoveDirection(1, 1);
+                    }
+                }
+                else
+                {
+                    if (dirG3Vector == Vector3.left)
+                    {
+                        MoveDirection(2, 2);
+                    }
+                    else if (dirG3Vector == Vector3.right)
+                    {
+                        MoveDirection(3, 3);
+                    }
                 }
                 
             }
-            else if (down.collider != null && Ghost3.transform.position.y > 7.5)
+            else if (down.collider != null && Ghost3.transform.position.y < -7.5)
             {
                 MoveDirection(2, 4);
-                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG3Vector, 1.75f);
+                //CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
 
-                /*
                 if (right.collider != null)
                 {
-                    MoveDirection(1, 1);
+                    if (dirG3Vector == Vector3.down)
+                    {
+                        MoveDirection(2, 2);
+                    }
+                    else if (dirG3Vector == Vector3.left)
+                    {
+                        MoveDirection(0, 0);
+                    }
                 }
-                */
+                else if (left.collider != null)
+                {
+                    if (dirG3Vector == Vector3.down)
+                    {
+                        MoveDirection(3, 3);
+                    }
+                    else if (dirG3Vector == Vector3.right)
+                    {
+                        MoveDirection(0, 0);
+                    }
+                }
+                else
+                {
+                    if (dirG3Vector == Vector3.left)
+                    {
+                        MoveDirection(3, 3);
+                    }
+                    else if (dirG3Vector == Vector3.right)
+                    {
+                        MoveDirection(2, 2);
+                    }
+                }
             }
             else if (up.collider == null)
             {
                 dirG3Vector = Vector3.up;
             }
-            else if (left.collider == null)
+            else if (left.collider == null || right.collider == null)
             {
-                dirG3Vector = Vector3.left;
+                MoveDirection(2, 4);
             }
+            /*
             else if (right.collider == null)
             {
                 dirG3Vector = Vector3.right;
-            }
+            } 
             else if (down.collider == null)
             {
                 dirG3Vector = Vector3.down;
             }
+            */
         }
         
 

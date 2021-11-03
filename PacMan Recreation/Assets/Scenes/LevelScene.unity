@@ -21131,6 +21131,10 @@ MonoBehaviour:
   characterController: {fileID: 2047062873}
   ghostController: {fileID: 583887099}
   ghostTimerText: {fileID: 1357030706}
+  lifeIndicator:
+  - {fileID: 219192968}
+  - {fileID: 911947543}
+  - {fileID: 361836942}
 --- !u!1 &1919934648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 646491035692771824, guid: 984239b04880e4244a8d06f152a5ef8f, type: 3}
