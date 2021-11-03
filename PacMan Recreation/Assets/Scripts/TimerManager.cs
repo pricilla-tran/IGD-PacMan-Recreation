@@ -120,6 +120,8 @@ public class TimerManager : MonoBehaviour
             else
             {
                 ghostTimer = 0;
+                ghostController.GhostAnimation();
+                ghostController.scaredMusic.Stop();
             }
 
             yield return null;
