@@ -133,7 +133,9 @@ public class PacStudentController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             ghostController.ScaredState();
+            timeManager.GhostTimerCountdown();
             //Invoke(ghostController.ScaredState, 1)
+            
             score += 100;
         }
 

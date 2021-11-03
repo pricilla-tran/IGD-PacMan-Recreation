@@ -16,6 +16,11 @@ public class TimerManager : MonoBehaviour
     public Text countdownText;
     public Text gameoverText;
     public PacStudentController characterController;
+    public GhostController ghostController;
+    private bool ghostTimerActive;
+    public Text ghostTimerText;
+    private float ghostTimer = 10;
+    private TimeSpan ghostTimePlaying;
 
     void Awake()
     {
@@ -31,7 +36,9 @@ public class TimerManager : MonoBehaviour
         timerActive = false;
         //StartTimer();
         characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<PacStudentController>();
+        ghostController = GameObject.FindGameObjectWithTag("GhostManager").GetComponent<GhostController>();
         characterController.enabled = false;
+        ghostController.enabled = false;
         StartCoroutine(Countdown());
     }
 
@@ -76,6 +83,7 @@ public class TimerManager : MonoBehaviour
         countdownText.text = "GO!";
         StartTimer();
         characterController.enabled = true;
+        ghostController.enabled = true;
         //gameoverText.enabled = true;
 
         yield return new WaitForSeconds(1.0f);
@@ -84,10 +92,45 @@ public class TimerManager : MonoBehaviour
 
     }
 
+    public void GhostTimerCountdown()
+    {
+        ghostTimerActive = true;
+        StartCoroutine(StartGhostCountdown());
+    }
+
+    private IEnumerator StartGhostCountdown()
+    {
+        //yield return null; 
+        while (ghostTimerActive)
+        {
+            if (ghostTimer > 0)
+            {
+                ghostTimer -= Time.deltaTime;
+                ghostTimePlaying = TimeSpan.FromSeconds(ghostTimer);
+                string ghostTimeStr = ghostTimePlaying.ToString("mm':'ss':'ff");
+                ghostTimerText.text = ghostTimeStr;
+
+                if (ghostTimer < 3)
+                {
+                    // Recovering State
+                    ghostController.RecoverState();
+                }
+
+            }
+            else
+            {
+                ghostTimer = 0;
+            }
+
+            yield return null;
+        }
+    }
+
     public void GameOver()
     {
         gameoverText.enabled = true;
         characterController.enabled = false;
+        ghostController.enabled = false;
     }
 
 

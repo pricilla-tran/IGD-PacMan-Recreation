@@ -21,6 +21,7 @@ public class GhostController : MonoBehaviour
     private int cycleCount = 0;
     private Vector3 dirG3Vector;
     private Vector3 dirG4Vector;
+    public AudioSource scaredMusic;
 
     // Start is called before the first frame update
     void Start()
@@ -67,10 +68,25 @@ public class GhostController : MonoBehaviour
         Ghost1Animator.ResetTrigger("Left");
         Ghost1Animator.ResetTrigger("Right");
         Ghost1Animator.SetTrigger("Scared");
-        //Ghost2Animator.SetTrigger("Scared");
-        //Ghost3Animator.SetTrigger("Scared");
-        //Ghost4Animator.SetTrigger("Scared");
+        Ghost2Animator.SetTrigger("Scared");
+        Ghost3Animator.SetTrigger("Scared");
+        Ghost4Animator.SetTrigger("Scared");
+        //if (Ghost1Animator.)
+        scaredMusic.Play();
 
+    }
+
+    public void RecoverState()
+    {
+        scaredMusic.Stop();
+        Ghost1Animator.ResetTrigger("Scared");
+        Ghost2Animator.ResetTrigger("Scared");
+        Ghost3Animator.ResetTrigger("Scared");
+        Ghost4Animator.ResetTrigger("Scared");
+        Ghost1Animator.SetTrigger("Recover");
+        Ghost2Animator.SetTrigger("Recover");
+        Ghost3Animator.SetTrigger("Recover");
+        Ghost4Animator.SetTrigger("Recover");
     }
 
     public void Ghost1Move()
@@ -111,7 +127,7 @@ public class GhostController : MonoBehaviour
                 CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
             }
             */
-            Debug.Log("Can't moveeee");
+            //Debug.Log("Can't moveeee");
         }
         else if (right.collider == null && dirG3Vector == Vector3.right)
         {
