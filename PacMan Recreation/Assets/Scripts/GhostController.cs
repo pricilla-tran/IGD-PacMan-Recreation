@@ -19,6 +19,8 @@ public class GhostController : MonoBehaviour
     private Vector3[] ghost4Pos;
     public float moveSpeed = 2;
     private int cycleCount = 0;
+    private Vector3 dirG1Vector;
+    private Vector3 dirG2Vector;
     private Vector3 dirG3Vector;
     private Vector3 dirG4Vector;
     public AudioSource scaredMusic;
@@ -32,6 +34,8 @@ public class GhostController : MonoBehaviour
         ghost4Pos[2] = new Vector3(4.5f, -0.5f, 0);
         ghost4Pos[3] = new Vector3(7.5f, -0.5f, 0);
 
+        dirG1Vector = Vector3.up;
+        dirG2Vector = Vector3.up;
         dirG3Vector = Vector3.up;
         dirG4Vector = Vector3.up;
 
@@ -59,6 +63,8 @@ public class GhostController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Ghost1Move();
+        Ghost2Move();
         Ghost3Move();
         Ghost4Move();
     }
@@ -119,6 +125,28 @@ public class GhostController : MonoBehaviour
         RaycastHit2D left = Physics2D.Raycast(Ghost1.transform.position, Vector2.left, 1.0f, LayerMask.GetMask("Wall"));
         RaycastHit2D down = Physics2D.Raycast(Ghost1.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
         RaycastHit2D up = Physics2D.Raycast(Ghost1.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
+
+        if (up.collider == null && dirG1Vector == Vector3.up)
+        {
+            CreateGhostTween(Ghost1, Ghost1.transform.position + dirG1Vector, 1.75f);
+        }
+        else if (down.collider == null && dirG1Vector == Vector3.down)
+        {
+            CreateGhostTween(Ghost1, Ghost1.transform.position + dirG1Vector, 1.75f);
+        }
+        else if (left.collider == null && dirG1Vector == Vector3.left)
+        {
+            CreateGhostTween(Ghost1, Ghost1.transform.position + dirG1Vector, 1.75f);
+        }
+        else if (right.collider == null && dirG1Vector == Vector3.right)
+        {
+            CreateGhostTween(Ghost1, Ghost1.transform.position + dirG1Vector, 1.75f);
+        }
+        else
+        {
+
+        }
+
     }
 
     public void Ghost2Move()
@@ -130,6 +158,26 @@ public class GhostController : MonoBehaviour
         RaycastHit2D down = Physics2D.Raycast(Ghost2.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
         RaycastHit2D up = Physics2D.Raycast(Ghost2.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
 
+        if (up.collider == null && dirG2Vector == Vector3.up)
+        {
+            CreateGhostTween(Ghost2, Ghost2.transform.position + dirG2Vector, 1.75f);
+        }
+        else if (down.collider == null && dirG2Vector == Vector3.down)
+        {
+            CreateGhostTween(Ghost2, Ghost2.transform.position + dirG2Vector, 1.75f);
+        }
+        else if (left.collider == null && dirG2Vector == Vector3.left)
+        {
+            CreateGhostTween(Ghost2, Ghost2.transform.position + dirG2Vector, 1.75f);
+        }
+        else if (right.collider == null && dirG2Vector == Vector3.right)
+        {
+            CreateGhostTween(Ghost2, Ghost2.transform.position + dirG2Vector, 1.75f);
+        }
+        else
+        {
+
+        }
 
     }
 
