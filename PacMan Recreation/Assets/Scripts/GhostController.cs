@@ -147,82 +147,66 @@ public class GhostController : MonoBehaviour
         else if (right.collider == null && dirG3Vector == Vector3.right)
         {
             CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
+            if (up.collider == null && left.collider == null && Ghost3.transform.position.x > 0.5)
+            {
+                dirG3Vector = Vector3.up;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG3Vector, 1.75f);
+                
+            }
         }
         else if (left.collider == null && dirG3Vector == Vector3.left)
         {
             CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
-            
+
+            if (up.collider == null && right.collider == null && Ghost3.transform.position.x < -0.5 && Ghost3.transform.position.y > 0.5)
+            {
+                dirG3Vector = Vector3.up;
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG3Vector, 1.75f);
+            }
+
         }
         
         else
         {
-            if (up.collider != null)
-            {
-                MoveDirection(2,4);
-                
-                if (right.collider != null || left.collider != null)
-                {
-                    MoveDirection(0, 2);
-                }
-                else if (down.collider == null && left.collider != null || down.collider == null && left.collider != null)
-                {
-                    dirG3Vector = Vector3.down;
-                }
-
-            }
-            else if (down.collider != null)
-            {
-                if (right.collider != null && dirG3Vector != Vector3.left && dirG3Vector != Vector3.right)
-                {
-                    MoveDirection(2, 4);
-                }
-                else if (left.collider != null && dirG3Vector != Vector3.left && dirG3Vector != Vector3.right)
-                {
-                    MoveDirection(2, 4);
-                }
-                else if (up.collider == null && left.collider != null || right.collider == null && up.collider == null)
-                {
-                    dirG3Vector = Vector3.up;
-                }
-                else
-                {
-                    MoveDirection(0, 2);
-                }
-                
-
-            }
-            else if (right.collider != null)
-            {
-                MoveDirection(0, 2);
-
-                if (up.collider == null && left.collider == null && Ghost4.transform.position.x > 0.5)
-                {
-                    dirG4Vector = Vector3.up;
-                    CreateGhostTween(Ghost4, Ghost4.transform.position + dirG4Vector, 1.75f);
-                    Debug.Log("Pizza");
-                }
-                else if (up.collider != null || down.collider != null)
-                {
-                    MoveDirection(0, 2);
-                }
-
-            }
-            else if (left.collider != null)
-            {
-                MoveDirection(0, 2);
-                Debug.Log("left if");
-            }
-
-            else if (up.collider == null || down.collider == null)
-            {
-                MoveDirection(0, 2);
-            }
-            
-            else if (right.collider == null || left.collider == null)
+            if (up.collider != null && Ghost3.transform.position.y > 7.5)
             {
                 MoveDirection(2, 4);
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG3Vector, 1.75f);
+
+                if (right.collider != null)
+                {
+                    MoveDirection(1, 1);
+                }
+                
             }
-            
+            else if (down.collider != null && Ghost3.transform.position.y > 7.5)
+            {
+                MoveDirection(2, 4);
+                CreateGhostTween(Ghost4, Ghost4.transform.position + dirG3Vector, 1.75f);
+
+                /*
+                if (right.collider != null)
+                {
+                    MoveDirection(1, 1);
+                }
+                */
+            }
+            else if (up.collider == null)
+            {
+                dirG3Vector = Vector3.up;
+            }
+            else if (left.collider == null)
+            {
+                dirG3Vector = Vector3.left;
+            }
+            else if (right.collider == null)
+            {
+                dirG3Vector = Vector3.right;
+            }
+            else if (down.collider == null)
+            {
+                dirG3Vector = Vector3.down;
+            }
         }
         
 
