@@ -121,7 +121,7 @@ public class TimerManager : MonoBehaviour
             else
             {
                 ghostTimer = 0;
-                ghostController.GhostAnimation();
+                ghostController.Ghost4Animation();
                 ghostController.scaredMusic.Stop();
             }
 

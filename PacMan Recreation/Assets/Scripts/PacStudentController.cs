@@ -138,6 +138,11 @@ public class PacStudentController : MonoBehaviour
             timeManager.GhostTimerCountdown();
             //Invoke(ghostController.ScaredState, 1)
             
+            //score += 100;
+        }
+        if (collision.gameObject.tag == "Cherry")
+        {
+            Destroy(collision.gameObject);
             score += 100;
         }
 

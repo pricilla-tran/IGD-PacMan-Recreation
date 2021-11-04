@@ -6349,6 +6349,7 @@ MonoBehaviour:
   Ghost4: {fileID: 1919934648}
   moveSpeed: 2
   scaredMusic: {fileID: 997966765}
+  pacStudent: {fileID: 2047062869}
 --- !u!4 &583887100
 Transform:
   m_ObjectHideFlags: 0
