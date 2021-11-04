@@ -71,7 +71,7 @@ public class GhostController : MonoBehaviour
         Ghost2Move();
         Ghost3Move();
         Ghost4Move();
-        //Ghost4Animation();
+        Ghost4Animation();
     }
 
     public void ScaredState()
