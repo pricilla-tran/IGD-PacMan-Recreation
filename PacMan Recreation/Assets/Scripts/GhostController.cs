@@ -201,6 +201,29 @@ public class GhostController : MonoBehaviour
             if (pacStudent.transform.position.sqrMagnitude < 10)
             {
                 // Move Towards PacStudent
+                RaycastHit2D psRight = Physics2D.Raycast(Ghost2.transform.position, Vector2.right, 5.0f, LayerMask.GetMask("PacStudent"));
+                RaycastHit2D psLeft = Physics2D.Raycast(Ghost2.transform.position, Vector2.left, 5.0f, LayerMask.GetMask("PacStudent"));
+                RaycastHit2D psDown = Physics2D.Raycast(Ghost2.transform.position, Vector2.down, 5.0f, LayerMask.GetMask("PacStudent"));
+                RaycastHit2D psUp = Physics2D.Raycast(Ghost2.transform.position, Vector2.up, 5.0f, LayerMask.GetMask("PacStudent"));
+
+
+                // Move Towards PacStudent
+                if (psUp.collider != null)
+                {
+                    dirG2Vector = Vector3.up;
+                }
+                else if (psDown.collider != null)
+                {
+                    dirG2Vector = Vector3.down;
+                }
+                else if (psRight.collider != null)
+                {
+                    dirG2Vector = Vector3.right;
+                }
+                else if (psLeft.collider != null)
+                {
+                    dirG2Vector = Vector3.left;
+                }
             }
         }
 
@@ -246,6 +269,10 @@ public class GhostController : MonoBehaviour
                 dirG3Vector = Vector3.down;
                 CreateGhostTween(Ghost3, Ghost3.transform.position + dirG3Vector, 1.75f);
 
+            }
+            else
+            {
+                dirG3Vector = Vector3.right;
             }
         }
         else if (left.collider == null && dirG3Vector == Vector3.left)
@@ -358,7 +385,7 @@ public class GhostController : MonoBehaviour
             {
                 dirG3Vector = Vector3.up;
             }
-            else if (left.collider == null || right.collider == null)
+            else if (left.collider == null && up.collider != null || right.collider == null && up.collider != null)
             {
                 MoveG3Direction(2, 4);
             }
