@@ -166,7 +166,14 @@ public class PacStudentController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ghost")
+        if (collision.gameObject.tag == "Ghost" && ghostController.scaredStateActive)
+        {
+
+            ghostController.DeathState();
+            //walkingSound.Stop();
+            
+        }
+        else if (collision.gameObject.tag == "Ghost")
         {
             timeManager.GameOver();
             //Destroy(gameObject);

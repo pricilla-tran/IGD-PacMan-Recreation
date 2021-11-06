@@ -26,6 +26,7 @@ public class GhostController : MonoBehaviour
     public AudioSource scaredMusic;
     public GameObject pacStudent;
     private PacStudentController psController;
+    public bool scaredStateActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -103,6 +104,15 @@ public class GhostController : MonoBehaviour
         Ghost2Animator.SetTrigger("Recover");
         Ghost3Animator.SetTrigger("Recover");
         Ghost4Animator.SetTrigger("Recover");
+    }
+
+    public void DeathState()
+    {
+        //scaredMusic.Stop();
+        Ghost1Animator.SetTrigger("Death");
+        Ghost2Animator.SetTrigger("Death");
+        Ghost3Animator.SetTrigger("Death");
+        Ghost4Animator.SetTrigger("Death");
     }
 
     public void Ghost1Animation()
