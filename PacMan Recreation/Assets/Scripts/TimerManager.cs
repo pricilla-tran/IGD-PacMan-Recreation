@@ -22,6 +22,9 @@ public class TimerManager : MonoBehaviour
     private float ghostTimer = 10;
     private TimeSpan ghostTimePlaying;
     public GameObject[] lifeIndicator;
+    private bool life1 = true;
+    private bool life2 = true;
+    private bool life3 = true;
 
     void Awake()
     {
@@ -131,10 +134,25 @@ public class TimerManager : MonoBehaviour
 
     public void GameOver()
     {
-        gameoverText.enabled = true;
-        characterController.enabled = false;
-        ghostController.enabled = false;
-        Destroy(lifeIndicator[0]);
+        if (life1 && life2 && life3)
+        {
+            lifeIndicator[0].SetActive(false);
+            life1 = false;
+        }
+        else if (life2 && life3)
+        {
+            lifeIndicator[1].SetActive(false);
+            life2 = false;
+        }
+        else if (life3)
+        {
+            lifeIndicator[2].SetActive(false);
+            gameoverText.enabled = true;
+            characterController.enabled = false;
+            ghostController.enabled = false;
+            Time.timeScale = 0;
+            //Destroy(lifeIndicator[0]);
+        }
     }
 
 

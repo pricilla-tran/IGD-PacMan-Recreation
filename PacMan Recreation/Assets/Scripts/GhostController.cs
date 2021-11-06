@@ -23,6 +23,7 @@ public class GhostController : MonoBehaviour
     private Vector3 dirG2Vector;
     private Vector3 dirG3Vector;
     private Vector3 dirG4Vector;
+    private Vector3 scaredDirVector;
     public AudioSource scaredMusic;
     public GameObject pacStudent;
     private PacStudentController psController;
@@ -90,12 +91,368 @@ public class GhostController : MonoBehaviour
         Ghost4Animator.SetTrigger("Scared");
         //if (Ghost1Animator.)
         scaredMusic.Play();
+        scaredStateActive = true;
+        ScaredMove(Ghost1);
+        ScaredMove(Ghost2);
+        ScaredMove(Ghost3);
+        ScaredMove(Ghost4);
 
+    }
+
+    public void ScaredMove(GameObject ghost) // Follows Ghost 1 Behaviour
+    {
+        // Move in a random valid direction that is further than or equal to the distance from Pacstudent to the current grid position 
+
+        RaycastHit2D right = Physics2D.Raycast(ghost.transform.position, Vector2.right, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D left = Physics2D.Raycast(ghost.transform.position, Vector2.left, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D down = Physics2D.Raycast(ghost.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Wall"));
+        RaycastHit2D up = Physics2D.Raycast(ghost.transform.position, Vector2.up, 1.0f, LayerMask.GetMask("Wall"));
+
+        // Move Away PacStudent
+        RaycastHit2D psRight = Physics2D.Raycast(ghost.transform.position, Vector2.right, 5.0f, LayerMask.GetMask("PacStudent"));
+        RaycastHit2D psLeft = Physics2D.Raycast(ghost.transform.position, Vector2.left, 5.0f, LayerMask.GetMask("PacStudent"));
+        RaycastHit2D psDown = Physics2D.Raycast(ghost.transform.position, Vector2.down, 5.0f, LayerMask.GetMask("PacStudent"));
+        RaycastHit2D psUp = Physics2D.Raycast(ghost.transform.position, Vector2.up, 5.0f, LayerMask.GetMask("PacStudent"));
+
+        if (psUp.collider != null)
+        {
+            //scaredDirVector = Vector3.up;
+            if (right.collider == null && scaredDirVector != Vector3.left)
+            {
+                scaredDirVector = Vector3.right;
+            }
+            else if (left.collider == null && scaredDirVector != Vector3.right)
+            {
+                scaredDirVector = Vector3.left;
+            }
+            else if (down.collider == null && scaredDirVector != Vector3.up)
+            {
+                scaredDirVector = Vector3.down;
+            }
+            else
+            {
+                scaredDirVector = Vector3.up;
+            }
+
+        }
+        else if (psDown.collider != null)
+        {
+            //dirG2Vector = Vector3.down;
+            if (right.collider == null && scaredDirVector != Vector3.left)
+            {
+                scaredDirVector = Vector3.right;
+            }
+            else if (left.collider == null && scaredDirVector != Vector3.right)
+            {
+                scaredDirVector = Vector3.left;
+            }
+            else if (up.collider == null && scaredDirVector != Vector3.down)
+            {
+                scaredDirVector = Vector3.up;
+            }
+            else
+            {
+                scaredDirVector = Vector3.down;
+            }
+        }
+        else if (psRight.collider != null)
+        {
+            //dirG2Vector = Vector3.right;
+            if (up.collider == null && scaredDirVector != Vector3.down)
+            {
+                scaredDirVector = Vector3.up;
+            }
+            else if (down.collider == null && scaredDirVector != Vector3.up)
+            {
+                scaredDirVector = Vector3.down;
+            }
+            else if (left.collider == null && scaredDirVector != Vector3.right)
+            {
+                scaredDirVector = Vector3.left;
+            }
+            else
+            {
+                scaredDirVector = Vector3.right;
+            }
+        }
+        else if (psLeft.collider != null)
+        {
+            //dirG2Vector = Vector3.left;
+            if (up.collider == null && scaredDirVector != Vector3.down)
+            {
+                scaredDirVector = Vector3.up;
+            }
+            else if (down.collider == null && scaredDirVector != Vector3.up)
+            {
+                scaredDirVector = Vector3.down;
+            }
+            else if (right.collider == null && scaredDirVector != Vector3.left)
+            {
+                scaredDirVector = Vector3.right;
+            }
+            else
+            {
+                scaredDirVector = Vector3.left;
+            }
+        }
+
+
+        if (up.collider == null && scaredDirVector == Vector3.up)
+        {
+            CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+            /*if (left.collider == null && right.collider == null && ghost.transform.position.y > 7.5) 
+            {
+                ScaredMoveDirection(2, 4);
+                Debug.Log("Problem is Here!");
+                //scaredDirVector = Vector3.up;
+                //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+
+            }*/
+        }
+        else if (down.collider == null && scaredDirVector == Vector3.down)
+        {
+            //CreateGhostTween(ghost.transform.position + dirVector, 1.75f);
+            CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+            Debug.Log("Correct");
+        }
+        else if (right.collider == null && scaredDirVector == Vector3.right)
+        {
+            CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+            if (up.collider == null && left.collider == null && down.collider == null) // NOte this 
+            {
+                ScaredMoveDirection(0, 3);
+                Debug.Log("Junction1");
+                if (scaredDirVector == Vector3.up || scaredDirVector == Vector3.left || scaredDirVector == Vector3.down)
+                {
+                    CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+                }
+
+            }
+            else if (up.collider == null && ghost.transform.position.y > 2.5 && ghost.transform.position.y < 7.5 && ghost.transform.position.x < 5.5 && ghost.transform.position.x > -0.5) // need this for the beginning
+            {
+                scaredDirVector = Vector3.up;
+            }
+            //else if (down.collider == null && left.collider == null && ghost.transform.position.y > 12.5 && ghost.transform.position.x < -12.5)
+            //{
+            //scaredDirVector = Vector3.down;
+            //Debug.Log("Junction2");
+            //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+
+            //}
+            else
+            {
+                scaredDirVector = Vector3.right;
+                Debug.Log("Else Right");
+            }
+        }
+        else if (left.collider == null && scaredDirVector == Vector3.left)
+        {
+            CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+
+            if (up.collider == null && right.collider == null && down.collider == null)
+            {
+                ScaredMoveDirection(0, 4);
+                Debug.Log("Junction5");
+                if (scaredDirVector == Vector3.up || scaredDirVector == Vector3.right || scaredDirVector == Vector3.down)
+                {
+                    CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+                }
+            }
+
+            else if (up.collider == null && ghost.transform.position.y > 2.5 && ghost.transform.position.y < 7.5 && ghost.transform.position.x > -5.5 && ghost.transform.position.x < 0.5) // need this for the beginning
+            {
+                scaredDirVector = Vector3.up;
+            }
+            /*
+            else if (down.collider == null && right.collider == null && ghost.transform.position.y > 12.5)
+            {
+                scaredDirVector = Vector3.down;
+                Debug.Log("Junction4");
+                //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+            }
+            */
+            else
+            {
+                scaredDirVector = Vector3.left;
+            }
+        }
+
+        else
+        {
+            if (down.collider != null && up.collider != null)
+            {
+                if (scaredDirVector == Vector3.left)
+                {
+                    scaredDirVector = Vector3.left;
+                }
+                else if (scaredDirVector == Vector3.right)
+                {
+                    scaredDirVector = Vector3.right;
+                }
+            }
+            else if (up.collider != null && ghost.transform.position.y > 7.5)
+            {
+                //ScaredMoveDirection(2, 4);
+                //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+
+                if (right.collider != null)
+                {
+                    if (scaredDirVector == Vector3.up)
+                    {
+                        scaredDirVector = Vector3.left;
+                        Debug.Log("1");
+
+                    }
+                    else if (scaredDirVector == Vector3.right)
+                    {
+                        scaredDirVector = Vector3.down;
+                        Debug.Log("2");
+                    }
+                    else
+                    {
+                        scaredDirVector = Vector3.left;
+                        Debug.Log("3");
+                    }
+                }
+                else if (left.collider != null)
+                {
+                    if (scaredDirVector == Vector3.up)
+                    {
+                        scaredDirVector = Vector3.right;
+                    }
+                    else if (scaredDirVector == Vector3.left)
+                    {
+                        scaredDirVector = Vector3.down;
+                    }
+                    else
+                    {
+                        scaredDirVector = Vector3.down;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Up Collider Hit");
+                    if (scaredDirVector == Vector3.left)
+                    {
+                        scaredDirVector = Vector3.left;
+                    }
+                    else if (scaredDirVector == Vector3.right)
+                    {
+                        scaredDirVector = Vector3.right;
+                    }
+                    else
+                    {
+                        ScaredMoveDirection(2, 4);
+                    }
+                }
+
+            }
+            else if (down.collider != null && ghost.transform.position.y < -7.5)
+            {
+                ScaredMoveDirection(2, 4);
+                //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+
+                if (right.collider != null)
+                {
+                    if (scaredDirVector == Vector3.down)
+                    {
+                        scaredDirVector = Vector3.left;
+                    }
+                    else if (scaredDirVector == Vector3.left)
+                    {
+                        scaredDirVector = Vector3.up;
+                    }
+                }
+                else if (left.collider != null)
+                {
+                    if (scaredDirVector == Vector3.down)
+                    {
+                        scaredDirVector = Vector3.right;
+                    }
+                    else if (scaredDirVector == Vector3.right)
+                    {
+                        scaredDirVector = Vector3.up;
+                    }
+                }
+                else
+                {
+                    if (scaredDirVector == Vector3.left)
+                    {
+                        scaredDirVector = Vector3.left;
+                    }
+                    else if (scaredDirVector == Vector3.right)
+                    {
+                        scaredDirVector = Vector3.right;
+                    }
+                    else if (scaredDirVector == Vector3.down)
+                    {
+                        ScaredMoveDirection(2, 4);
+                    }
+                }
+            }
+            else if (down.collider != null && ghost.transform.position.y < 8.5)
+            {
+                if (left.collider != null && ghost.transform.position.x < -9.5)
+                {
+                    scaredDirVector = Vector3.right;
+                    Debug.Log("Down/Left Corner");
+                }
+                else if (right.collider != null && ghost.transform.position.x > 9.5)
+                {
+                    scaredDirVector = Vector3.left;
+                    Debug.Log("Down/Right Corner");
+                }
+                else
+                {
+                    scaredDirVector = Vector3.up;
+                }
+            }
+            else if (up.collider == null && down.collider != null && scaredDirVector == Vector3.down)
+            {
+                ScaredMoveDirection(2, 4);
+            }
+            else if (up.collider == null && down.collider == null)
+            {
+                scaredDirVector = Vector3.up;
+            }
+            else if (up.collider != null)
+            {
+                ScaredMoveDirection(2, 4);
+            }
+
+        }
+    }
+
+    public void ScaredMoveDirection(int min, int max)
+    {
+        int direction = Random.Range(min, max);
+        switch (direction)
+        {
+            case 0:
+                // Up
+                scaredDirVector = Vector3.up;
+                break;
+            case 1:
+                // Down 
+                scaredDirVector = Vector3.down;
+                break;
+            case 2:
+                // Left
+                scaredDirVector = Vector3.left;
+                break;
+            case 3:
+                // Right
+                scaredDirVector = Vector3.right;
+                break;
+            default:
+                break;
+        }
     }
 
     public void RecoverState()
     {
         //scaredMusic.Stop();
+        scaredStateActive = false;
         Ghost1Animator.ResetTrigger("Scared");
         Ghost2Animator.ResetTrigger("Scared");
         Ghost3Animator.ResetTrigger("Scared");
@@ -106,13 +463,33 @@ public class GhostController : MonoBehaviour
         Ghost4Animator.SetTrigger("Recover");
     }
 
-    public void DeathState()
+    public void DeathState(GameObject collided)
     {
         //scaredMusic.Stop();
+        scaredStateActive = false;
+        /*
         Ghost1Animator.SetTrigger("Death");
         Ghost2Animator.SetTrigger("Death");
         Ghost3Animator.SetTrigger("Death");
         Ghost4Animator.SetTrigger("Death");
+        */
+        //collided.GetComponent<Animator>.Set
+        if (collided == Ghost1)
+        {
+            Ghost1Animator.SetTrigger("Death");
+        }
+        else if (collided == Ghost2)
+        {
+            Ghost2Animator.SetTrigger("Death");
+        }
+        else if (collided == Ghost3)
+        {
+            Ghost3Animator.SetTrigger("Death");
+        }
+        else if (collided == Ghost4)
+        {
+            Ghost4Animator.SetTrigger("Death");
+        }
     }
 
     public void Ghost1Animation()

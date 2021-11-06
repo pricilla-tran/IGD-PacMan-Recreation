@@ -169,11 +169,11 @@ public class PacStudentController : MonoBehaviour
         if (collision.gameObject.tag == "Ghost" && ghostController.scaredStateActive)
         {
 
-            ghostController.DeathState();
+            ghostController.DeathState(collision.gameObject);
             //walkingSound.Stop();
             
         }
-        else if (collision.gameObject.tag == "Ghost")
+        else if (collision.gameObject.tag == "Ghost" && !ghostController.scaredStateActive)
         {
             timeManager.GameOver();
             //Destroy(gameObject);
