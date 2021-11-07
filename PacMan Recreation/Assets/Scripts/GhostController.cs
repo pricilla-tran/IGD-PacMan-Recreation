@@ -326,21 +326,21 @@ public class GhostController : MonoBehaviour
                 scaredDirVector = Vector3.right;
                 Debug.Log("Tight Space");
             }
-            else if (up.collider == null && left.collider == null && down.collider == null) // NOte this 
+            else if (up.collider == null && left.collider == null && down.collider == null && ghost.transform.position.x > -8.5 && ghost.transform.position.x < 8.5) // NOte this 
             {
                 ScaredMoveDirection(0, 3);
                 //Debug.Log("Junction1");
-                if (scaredDirVector == Vector3.up || scaredDirVector == Vector3.left || scaredDirVector == Vector3.down)
-                {
+                //if (scaredDirVector == Vector3.up || scaredDirVector == Vector3.left || scaredDirVector == Vector3.down)
+                //{
                     
-                    CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
+                    //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
                     //Debug.Log("Problem Here!");
-                }
-                else
-                {
-                    ScaredMoveDirection(0, 3);
-                }
-                Debug.Log("Problem Here!");
+                //}
+                //else
+                //{
+                    //ScaredMoveDirection(0, 3);
+                //}
+                //Debug.Log("Problem Here!" + ghost.name);
             }
             else if (up.collider == null && ghost.transform.position.y > 2.5 && ghost.transform.position.y < 7.5 && ghost.transform.position.x < 5.5 && ghost.transform.position.x > -0.5) // need this for the beginning
             {
@@ -474,7 +474,7 @@ public class GhostController : MonoBehaviour
                         scaredDirVector = Vector3.down;
                     }
                 }
-                else
+                else if (down.collider != null)
                 {
                     //Debug.Log("Up Collider Hit");
                     if (scaredDirVector == Vector3.left)
@@ -487,7 +487,15 @@ public class GhostController : MonoBehaviour
                     }
                     else
                     {
-                        ScaredMoveDirection(2, 4);
+                        if (left.collider == null)
+                        {
+                            scaredDirVector = Vector3.left;
+                        }
+                        else if (right.collider == null)
+                        {
+                            scaredDirVector = Vector3.right;
+                        }
+                        Debug.Log("Gotcha");
                     }
                 }
 
