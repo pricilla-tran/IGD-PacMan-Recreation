@@ -12395,7 +12395,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -20905,7 +20905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9113971064546802113, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 9113971064546802113, guid: 7b5d4e0495a43c64cb5c8f211f96b097, type: 3}
       propertyPath: m_LocalPosition.z

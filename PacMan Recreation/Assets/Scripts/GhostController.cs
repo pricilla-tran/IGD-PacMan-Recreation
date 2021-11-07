@@ -29,6 +29,10 @@ public class GhostController : MonoBehaviour
     private PacStudentController psController;
     public bool scaredStateActive = false;
     private Vector3[] spawnPoints;
+    private bool setScared1 = false;
+    private bool setScared2 = false;
+    private bool setScared3 = false;
+    private bool setScared4 = false;
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +84,10 @@ public class GhostController : MonoBehaviour
             Ghost3Animation();
             Ghost4Move();
             Ghost4Animation();
+            setScared1 = false;
+            setScared2 = false;
+            setScared3 = false;
+            setScared4 = false;
         }
         else if (scaredStateActive)
         {
@@ -88,7 +96,12 @@ public class GhostController : MonoBehaviour
             ScaredMove(Ghost2);
             ScaredMove(Ghost3);
             ScaredMove(Ghost4);
-            
+            /*
+            setScared1 = true;
+            setScared2 = true;
+            setScared3 = true;
+            setScared4 = true;
+            */
             //ScaredState();
         }
     }
@@ -99,6 +112,26 @@ public class GhostController : MonoBehaviour
         Ghost1Animator.ResetTrigger("Up");
         Ghost1Animator.ResetTrigger("Left");
         Ghost1Animator.ResetTrigger("Right");
+        Ghost1Animator.ResetTrigger("Recover");
+
+        Ghost2Animator.ResetTrigger("Down");
+        Ghost2Animator.ResetTrigger("Up");
+        Ghost2Animator.ResetTrigger("Left");
+        Ghost2Animator.ResetTrigger("Right");
+        Ghost2Animator.ResetTrigger("Recover");
+
+        Ghost3Animator.ResetTrigger("Down");
+        Ghost3Animator.ResetTrigger("Up");
+        Ghost3Animator.ResetTrigger("Left");
+        Ghost3Animator.ResetTrigger("Right");
+        Ghost3Animator.ResetTrigger("Recover");
+
+        Ghost4Animator.ResetTrigger("Down");
+        Ghost4Animator.ResetTrigger("Up");
+        Ghost4Animator.ResetTrigger("Left");
+        Ghost4Animator.ResetTrigger("Right");
+        Ghost4Animator.ResetTrigger("Recover");
+
         Ghost1Animator.SetTrigger("Scared");
         Ghost2Animator.SetTrigger("Scared");
         Ghost3Animator.SetTrigger("Scared");
@@ -128,6 +161,30 @@ public class GhostController : MonoBehaviour
         RaycastHit2D psLeft = Physics2D.Raycast(ghost.transform.position, Vector2.left, 5.0f, LayerMask.GetMask("PacStudent"));
         RaycastHit2D psDown = Physics2D.Raycast(ghost.transform.position, Vector2.down, 5.0f, LayerMask.GetMask("PacStudent"));
         RaycastHit2D psUp = Physics2D.Raycast(ghost.transform.position, Vector2.up, 5.0f, LayerMask.GetMask("PacStudent"));
+
+        // Set Positions 
+        if (ghost == Ghost1 && !setScared1)
+        {
+            scaredDirVector = dirG1Vector;
+            setScared1 = true;
+            //Debug.Log("Ghost1 Success");
+        }
+        else if (ghost == Ghost2 && !setScared2)
+        {
+            scaredDirVector = dirG2Vector;
+            setScared2 = true;
+        }
+        else if (ghost == Ghost3 && !setScared3)
+        {
+            scaredDirVector = dirG3Vector;
+            setScared3 = true;
+        }
+        else if (ghost == Ghost4 && !setScared4)
+        {
+            scaredDirVector = dirG4Vector;
+            setScared4 = true;
+        }
+
 
         if (psUp.collider != null)
         {
@@ -210,8 +267,29 @@ public class GhostController : MonoBehaviour
                 scaredDirVector = Vector3.left;
             }
         }
+        /*
+        if (down.collider != null && up.collider != null)
+        {
+            Debug.Log("Up/Down Collide");
+            if (scaredDirVector == Vector3.left)
+            {
+                scaredDirVector = Vector3.left;
+                Debug.Log("Issue 1 Here");
+            }
+            else if (scaredDirVector == Vector3.right)
+            {
+                scaredDirVector = Vector3.right;
+                Debug.Log("Issue 2 Here");
+            }
+            
+        }
+        else if (up.collider != null && down.collider == null && ghost.transform.position.y > 7.5) 
+        {
+            ScaredMoveDirection(2, 4);
 
-
+        }
+        */
+        
         if (up.collider == null && scaredDirVector == Vector3.up)
         {
             CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
@@ -223,26 +301,46 @@ public class GhostController : MonoBehaviour
                 //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
 
             }*/
+            if (left.collider != null && right.collider != null)
+            {
+                scaredDirVector = Vector3.up;
+            }
         }
         else if (down.collider == null && scaredDirVector == Vector3.down)
         {
             //CreateGhostTween(ghost.transform.position + dirVector, 1.75f);
             CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
             //Debug.Log("Correct");
+            if (left.collider != null && right.collider != null)
+            {
+                scaredDirVector = Vector3.down;
+            }
+
         }
         else if (right.collider == null && scaredDirVector == Vector3.right)
         {
+            //Debug.Log("Happy");
             CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
-            if (up.collider == null && left.collider == null && down.collider == null) // NOte this 
+            if (up.collider != null && down.collider != null)
+            {
+                scaredDirVector = Vector3.right;
+                Debug.Log("Tight Space");
+            }
+            else if (up.collider == null && left.collider == null && down.collider == null) // NOte this 
             {
                 ScaredMoveDirection(0, 3);
                 //Debug.Log("Junction1");
                 if (scaredDirVector == Vector3.up || scaredDirVector == Vector3.left || scaredDirVector == Vector3.down)
                 {
+                    
                     CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
                     //Debug.Log("Problem Here!");
                 }
-
+                else
+                {
+                    ScaredMoveDirection(0, 3);
+                }
+                Debug.Log("Problem Here!");
             }
             else if (up.collider == null && ghost.transform.position.y > 2.5 && ghost.transform.position.y < 7.5 && ghost.transform.position.x < 5.5 && ghost.transform.position.x > -0.5) // need this for the beginning
             {
@@ -255,6 +353,7 @@ public class GhostController : MonoBehaviour
             //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
 
             //}
+            
             else
             {
                 scaredDirVector = Vector3.right;
@@ -264,8 +363,11 @@ public class GhostController : MonoBehaviour
         else if (left.collider == null && scaredDirVector == Vector3.left)
         {
             CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
-
-            if (up.collider == null && right.collider == null && down.collider == null)
+            if (up.collider != null && down.collider != null)
+            {
+                scaredDirVector = Vector3.left;
+            }
+            else if (up.collider == null && right.collider == null && down.collider == null)
             {
                 ScaredMoveDirection(0, 4);
                 //Debug.Log("Junction5");
@@ -279,6 +381,7 @@ public class GhostController : MonoBehaviour
             {
                 scaredDirVector = Vector3.up;
             }
+            
             /*
             else if (down.collider == null && right.collider == null && ghost.transform.position.y > 12.5)
             {
@@ -295,8 +398,10 @@ public class GhostController : MonoBehaviour
 
         else
         {
+            /*
             if (down.collider != null && up.collider != null)
             {
+                Debug.Log("Up/Down Collide");
                 if (scaredDirVector == Vector3.left)
                 {
                     scaredDirVector = Vector3.left;
@@ -307,8 +412,30 @@ public class GhostController : MonoBehaviour
                     scaredDirVector = Vector3.right;
                     Debug.Log("Issue 2 Here");
                 }
-            }
-            else if (up.collider != null && ghost.transform.position.y > 7.5)
+                else
+                {
+                    /* if (ghost == Ghost1)
+                    {
+                        scaredDirVector = dirG1Vector;
+                        //Debug.Log("Ghost1 Success");
+                    }
+                    else if (ghost == Ghost2)
+                    {
+                        scaredDirVector = dirG1Vector;
+                    }
+                    else if (ghost == Ghost3)
+                    {
+                        scaredDirVector = dirG1Vector;
+                    }
+                    else if (ghost == Ghost4)
+                    {
+                        scaredDirVector = dirG1Vector;
+                    } */
+                    //ScaredMoveDirection(2, 4);
+                //}
+        //}
+    
+            if (up.collider != null && ghost.transform.position.y > 7.5) // meant to be else 
             {
                 //ScaredMoveDirection(2, 4);
                 //CreateGhostTween(ghost, ghost.transform.position + scaredDirVector, 1.75f);
@@ -433,7 +560,7 @@ public class GhostController : MonoBehaviour
             {
                 scaredDirVector = Vector3.up;
             }
-            else if (up.collider != null)
+            else if (up.collider != null && scaredDirVector != Vector3.left && scaredDirVector != Vector3.right)
             {
                 ScaredMoveDirection(2, 4);
             }
@@ -470,7 +597,7 @@ public class GhostController : MonoBehaviour
     public void RecoverState()
     {
         //scaredMusic.Stop();
-        scaredStateActive = false;
+        //scaredStateActive = false;
         Ghost1Animator.ResetTrigger("Scared");
         Ghost2Animator.ResetTrigger("Scared");
         Ghost3Animator.ResetTrigger("Scared");
@@ -479,6 +606,7 @@ public class GhostController : MonoBehaviour
         Ghost2Animator.SetTrigger("Recover");
         Ghost3Animator.SetTrigger("Recover");
         Ghost4Animator.SetTrigger("Recover");
+        scaredStateActive = false;
     }
 
     public void DeathState(GameObject collided)

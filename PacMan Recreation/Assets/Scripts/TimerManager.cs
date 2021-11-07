@@ -124,12 +124,16 @@ public class TimerManager : MonoBehaviour
             else
             {
                 ghostTimer = 0;
-                ghostController.Ghost4Animation();
+                //ghostController.Ghost4Animation();
+                ghostTimerActive = false;
                 ghostController.scaredMusic.Stop();
             }
 
             yield return null;
         }
+
+        ghostTimer = 10;
+        ghostTimerActive = true;
     }
 
     public void GameOver()
