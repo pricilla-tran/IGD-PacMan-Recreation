@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour
 {
     public AudioSource walkingSound;
-    public AudioSource IntroBGMusic;
+    //public AudioSource IntroBGMusic;
     public AudioSource BGMusic;
     //private float soundTimer = 0f;
     //const float moveWait = 2.0f;
@@ -14,7 +14,7 @@ public class SoundPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        IntroBGMusic.Play();
+        //IntroBGMusic.Play();
         Invoke("PlayBG", 1.5f);
     }
 

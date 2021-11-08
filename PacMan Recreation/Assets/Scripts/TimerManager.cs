@@ -25,6 +25,7 @@ public class TimerManager : MonoBehaviour
     private bool life1 = true;
     private bool life2 = true;
     private bool life3 = true;
+    public AudioSource IntroBGMusic;
 
     void Awake()
     {
@@ -78,13 +79,14 @@ public class TimerManager : MonoBehaviour
         while (countdownTime > 0)
         {
             countdownText.text = countdownTime.ToString();
-
+            IntroBGMusic.Play();
             yield return new WaitForSeconds(1.0f);
 
             countdownTime--;
         }
 
         countdownText.text = "GO!";
+        IntroBGMusic.Stop();
         StartTimer();
         characterController.enabled = true;
         ghostController.enabled = true;

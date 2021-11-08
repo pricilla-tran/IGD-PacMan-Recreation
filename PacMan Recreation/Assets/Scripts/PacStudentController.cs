@@ -30,6 +30,7 @@ public class PacStudentController : MonoBehaviour
     private bool teleported = false;
     private TimerManager timeManager;
     private GhostController ghostController;
+    public AudioSource pelletEating;
     //public GameObject[] lifeIndicator; 
 
     // Start is called before the first frame update
@@ -106,6 +107,8 @@ public class PacStudentController : MonoBehaviour
             
             Destroy(collision.gameObject);
             score += 10;
+
+            pelletEating.Play();
             /*
             if (score == 0)
             {

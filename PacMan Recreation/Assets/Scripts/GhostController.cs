@@ -33,6 +33,8 @@ public class GhostController : MonoBehaviour
     private bool setScared2 = false;
     private bool setScared3 = false;
     private bool setScared4 = false;
+    public AudioSource deathMusic;
+    private bool deathStateActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +76,7 @@ public class GhostController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!scaredStateActive)
+        if (!scaredStateActive && !deathStateActive)
         {
             Ghost1Move();
             Ghost1Animation();
@@ -88,6 +90,7 @@ public class GhostController : MonoBehaviour
             setScared2 = false;
             setScared3 = false;
             setScared4 = false;
+            deathMusic.Stop();
         }
         else if (scaredStateActive)
         {
@@ -104,6 +107,7 @@ public class GhostController : MonoBehaviour
             */
             //ScaredState();
         }
+        
     }
 
     public void ScaredState()
@@ -619,8 +623,9 @@ public class GhostController : MonoBehaviour
 
     public void DeathState(GameObject collided)
     {
-        //scaredMusic.Stop();
+        deathMusic.Play();
         scaredStateActive = false;
+        deathStateActive = true;
         /*
         Ghost1Animator.SetTrigger("Death");
         Ghost2Animator.SetTrigger("Death");
